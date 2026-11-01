@@ -1141,7 +1141,7 @@ function detectActivities(rows) {
 
     // 大众启用? 是网站公开显示的开关；若表格有此栏，必须明确填「是」
     const publicHeaderExists = Object.keys(obj).some(key => norm(key) === norm("大众启用?"));
-    const publicEnabled = getValue(obj, [/^大众启用$/]);
+    const publicEnabled = getValue(obj, [/^大众启用\??$/]);
 
     const category = getValue(obj, [
       /^(category|type|类别|类型|分类)$/,
