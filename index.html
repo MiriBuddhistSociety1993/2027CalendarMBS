@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -1134,10 +1133,15 @@ function detectActivities(rows) {
       /enddate/, /结束日期/
     ]);
 
-    const enabled = getValue(obj, [
-      /^(enabled|active|status|启用|状态|是否启用)$/,
-      /enabled/, /active/
+    // 内部启用? 维持原有逻辑：否/停用时不载入；空白视为启用
+    const internalEnabled = getValue(obj, [
+      /^(enabled|active|status|启用|状态|是否启用|内部启用)$/,
+      /内部启用/, /enabled/, /active/
     ]);
+
+    // 大众启用? 是网站公开显示的开关；若表格有此栏，必须明确填「是」
+    const publicHeaderExists = Object.keys(obj).some(key => norm(key) === norm("大众启用?"));
+    const publicEnabled = getValue(obj, [/^大众启用$/]);
 
     const category = getValue(obj, [
       /^(category|type|类别|类型|分类)$/,
@@ -1160,16 +1164,26 @@ function detectActivities(rows) {
     ]);
 
     const recurrence = getValue(obj, [
-      /^(recurrence|repeat|重复|重复规则)$/,
-      /recurrence/, /repeat/, /重复/
+      /^(recurrence|repeat|重复|重复规则|频率)$/,
+      /recurrence/, /repeat/, /重复/, /频率/
+    ]);
+
+    const repeatUntilRaw = getValue(obj, [
+      /^(repeatuntil|重复至|重复截止日期|截止日期)$/,
+      /repeatuntil/, /重复至/
     ]);
 
     const start = parseDate(startRaw);
     const end = parseDate(endRaw) || start;
+    const repeatUntil = parseDate(repeatUntilRaw);
 
     if (!title || !start) return null;
 
-    if (/^(false|no|n|0|inactive|disabled|否|停用)$/i.test(enabled)) {
+    if (/^(false|no|n|0|inactive|disabled|否|停用)$/i.test(internalEnabled)) {
+      return null;
+    }
+
+    if (publicHeaderExists && !/^是$/i.test(clean(publicEnabled))) {
       return null;
     }
 
@@ -1178,6 +1192,7 @@ function detectActivities(rows) {
       title,
       start,
       end,
+      repeatUntil,
       category,
       location,
       owner,
@@ -1194,9 +1209,14 @@ function expandActivities(items) {
   for (const activity of items) {
     const start = activity.start;
     const end = activity.end || start;
-    const rule = (activity.recurrence || "").toLowerCase();
+    const rule = clean(activity.recurrence || "单次").toLowerCase();
 
-    if (!rule || /^(none|no|never|无|不重复|一次|one.?time)$/i.test(rule)) {
+    const isSingle =
+      !rule ||
+      /^(none|no|never|无|不重复|一次|one.?time|单次)$/i.test(rule);
+
+    // 单次活动：依照开始日期及结束日期显示（包括多日活动）
+    if (isSingle) {
       for (
         let date = new Date(start), count = 0;
         date <= end && count < 370;
@@ -1204,25 +1224,28 @@ function expandActivities(items) {
       ) {
         expanded.push({ ...activity, date: dateKey(date) });
       }
-
       continue;
     }
 
+    // 完整对应 Excel「频率」选项
     const mode =
-      /daily|每天|每日|日重复/.test(rule) ? "daily" :
-      /weekly|每周|星期|周重复/.test(rule) ? "weekly" :
-      /monthly|每月|月重复/.test(rule) ? "monthly" : "";
+      /^(daily|每日|每天|日重复)$/.test(rule) ? "daily" :
+      /^(weekly|每周|星期|周重复)$/.test(rule) ? "weekly" :
+      /^(biweekly|fortnightly|每两周|每隔两周)$/.test(rule) ? "biweekly" :
+      /^(monthly|每月|月重复)$/.test(rule) ? "monthly" :
+      /^(yearly|annually|每年|每年度)$/.test(rule) ? "yearly" : "";
 
+    // 未识别的频率不擅自重复，避免错误地制造活动日期
     if (!mode) {
-      expanded.push({ ...activity, date: dateKey(start) });
+      console.warn("未识别的活动频率：", activity.title, activity.recurrence);
       continue;
     }
 
-    const lastDate = end > start ? end : new Date(2027, 11, 31);
-
+    // 重复至为空白时，默认至 2027 年 12 月 31 日
+    const lastDate = activity.repeatUntil || new Date(2027, 11, 31);
     const stop = new Date(Math.min(
       lastDate.getTime(),
-      new Date(2028, 11, 31).getTime()
+      new Date(2027, 11, 31).getTime()
     ));
 
     for (
@@ -1230,12 +1253,22 @@ function expandActivities(items) {
       date <= stop && count < 500;
       date = addDays(date, 1), count++
     ) {
+      const daysFromStart = Math.round(
+        (date.getTime() - start.getTime()) / 86400000
+      );
+
       const match =
         mode === "daily" ||
-        (mode === "weekly" && date.getDay() === start.getDay()) ||
-        (mode === "monthly" && date.getDate() === start.getDate());
+        (mode === "weekly" && daysFromStart % 7 === 0) ||
+        (mode === "biweekly" && daysFromStart % 14 === 0) ||
+        (mode === "monthly" && date.getDate() === start.getDate()) ||
+        (mode === "yearly" &&
+          date.getMonth() === start.getMonth() &&
+          date.getDate() === start.getDate());
 
-      if (match) expanded.push({ ...activity, date: dateKey(date) });
+      if (match) {
+        expanded.push({ ...activity, date: dateKey(date) });
+      }
     }
   }
 
