@@ -809,6 +809,21 @@ footer { max-width: none; padding: 22px 16px 30px; background: #e9e8df; color: #
   .weekdays, .days { gap: 3px; }
 }
 
+
+
+/* ===== Special styling: school holidays ===== */
+.event-chip.school-holiday {
+  background: #e7f0fb;
+  color: #285b91;
+  border-left-color: #5b91c8;
+}
+.event.school-holiday {
+  background: #f5f9ff;
+  border-color: #c9dcef;
+}
+.event.school-holiday h3 { color: #285b91; }
+.event.school-holiday .date { color: #4d7eae; }
+
 </style>
 </head>
 
@@ -1141,7 +1156,7 @@ function detectActivities(rows) {
 
     // 大众启用? 是网站公开显示的开关；若表格有此栏，必须明确填「是」
     const publicHeaderExists = Object.keys(obj).some(key => norm(key) === norm("大众启用?"));
-    const publicEnabled = getValue(obj, [/^大众启用\??$/]);
+    const publicEnabled = getValue(obj, [/^大众启用$/]);
 
     const category = getValue(obj, [
       /^(category|type|类别|类型|分类)$/,
@@ -1386,10 +1401,28 @@ function matchesSearch(activity) {
     ].join(" ").toLowerCase().includes(searchTerm);
 }
 
+// 同一天的活动显示顺序：公共假期 → 学校假期 → 青年团活动 → 其他活动
+function eventPriority(activity) {
+  const title = clean(activity.title);
+  if (title.includes("开斋节")) return 1;
+  if (title.includes("学校假期")) return 2;
+  if (title.includes("青年团")) return 3;
+  return 4;
+}
+
+function compareActivities(a, b) {
+  return eventPriority(a) - eventPriority(b) ||
+    a.title.localeCompare(b.title, "zh-CN");
+}
+
+function isSchoolHoliday(activity) {
+  return clean(activity.title).includes("学校假期");
+}
+
 function activityOn(key) {
-  return activities.filter(activity =>
-    activity.date === key && matchesSearch(activity)
-  );
+  return activities
+    .filter(activity => activity.date === key && matchesSearch(activity))
+    .sort(compareActivities);
 }
 
 function renderCalendar() {
@@ -1431,7 +1464,7 @@ function renderCalendar() {
           : ""}
 
         ${events.slice(0, 3).map(event =>
-          `<span class="event-chip" title="${escapeHTML(event.title)}">${escapeHTML(event.title)}</span>`
+          `<span class="event-chip${isSchoolHoliday(event) ? " school-holiday" : ""}" title="${escapeHTML(event.title)}">${escapeHTML(event.title)}</span>`
         ).join("")}
 
         ${events.length > 3
@@ -1476,7 +1509,7 @@ function eventCard(activity) {
     : activity.date;
 
   return `
-    <article class="event">
+    <article class="event${isSchoolHoliday(activity) ? " school-holiday" : ""}">
       <div class="date">${escapeHTML(dateText)}</div>
       <h3>${escapeHTML(activity.title)}</h3>
 
@@ -1521,8 +1554,7 @@ function renderList() {
   }
 
   list.sort((a, b) =>
-    a.date.localeCompare(b.date) ||
-    a.title.localeCompare(b.title)
+    a.date.localeCompare(b.date) || compareActivities(a, b)
   );
 
   $("listTitle").textContent = title;
