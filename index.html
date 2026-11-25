@@ -1027,6 +1027,7 @@ footer {
     font-size: 8px;
   }
 }
+
 /* =========================================================
    BADGE UPDATE ONLY
    Lunar marker and actual holiday name
@@ -1038,21 +1039,18 @@ footer {
   align-items: center;
 
   gap: 3px;
-
-  margin:
-    0 0 5px;
+  margin: 0 0 5px;
 }
 
 
-/* 农历初一、十五 */
+/* 农历初一 / 十五 */
 
 .lunar-badge {
   display: inline-block;
 
   max-width: 100%;
 
-  padding:
-    2px 6px;
+  padding: 2px 6px;
 
   color: #a2554b;
   background: #f8e8e5;
@@ -1071,15 +1069,14 @@ footer {
 }
 
 
-/* 真正的假期名称 */
+/* 真正假期名称 */
 
 .holiday-badge {
   display: inline-block;
 
   max-width: 100%;
 
-  padding:
-    2px 6px;
+  padding: 2px 6px;
 
   color: #86591c;
   background: #f4eadb;
@@ -1098,7 +1095,7 @@ footer {
 }
 
 
-/* 手机 */
+/* Mobile */
 
 @media(max-width: 520px) {
 
@@ -1108,15 +1105,12 @@ footer {
 
   .date-info-badges {
     gap: 2px;
-
-    margin:
-      0 0 3px;
+    margin: 0 0 3px;
   }
 
   .lunar-badge,
   .holiday-badge {
-    padding:
-      1px 4px;
+    padding: 1px 4px;
 
     border-radius: 5px;
 
@@ -1125,13 +1119,12 @@ footer {
   }
 
   .event-chip {
-    margin:
-      2px 0;
+    margin: 2px 0;
   }
 }
 
 
-/* 特别窄的手机 */
+/* Very small mobile */
 
 @media(max-width: 360px) {
 
@@ -1147,14 +1140,11 @@ footer {
     max-width: 100%;
 
     margin-bottom: 2px;
-
-    padding:
-      1px 3px;
+    padding: 1px 3px;
 
     font-size: 7px;
   }
 }
-
 
 
 </style>
@@ -3057,208 +3047,127 @@ function activityOn(key) {
 /* =========================================================
    Render calendar
    ========================================================= */
-
 function renderCalendar() {
-  const year =
-    viewDate.getFullYear();
-
-  const month =
-    viewDate.getMonth();
-
+  const year = viewDate.getFullYear();
+  const month = viewDate.getMonth();
 
   $("monthLabel").textContent =
     `${year} 年 ${month + 1} 月`;
 
-
   const first =
-    new Date(
-      year,
-      month,
-      1
-    );
-
+    new Date(year, month, 1);
 
   const start =
-    addDays(
-      first,
-      -first.getDay()
-    );
-
+    addDays(first, -first.getDay());
 
   const todayKey =
-    dateKey(
-      new Date()
-    );
-
+    dateKey(new Date());
 
   let html = "";
 
-
-  for (
-    let i = 0;
-    i < 42;
-    i++
-  ) {
+  for (let i = 0; i < 42; i++) {
     const date =
-      addDays(
-        start,
-        i
-      );
-
+      addDays(start, i);
 
     const key =
       dateKey(date);
 
-
     const inMonth =
-      date.getMonth() ===
-      month;
-
+      date.getMonth() === month;
 
     const events =
       activityOn(key);
 
-
     const info =
       infoFor(key);
-
-
-    /*
-      [BADGE CHANGE 1]
-
-      只从原有 info 对象取得农历及假期名称。
-      没有修改 parseDateInfo() 或 CSV 读取。
-    */
 
     const lunarText =
       info
         ? clean(info.lunar)
         : "";
 
-
     const holidayText =
       info
         ? clean(info.holiday)
         : "";
 
-
     const classes =
       "day" +
-
-      (
-        !inMonth
-          ? " outside"
-          : ""
-      ) +
-
-      (
-        key === todayKey
-          ? " today"
-          : ""
-      ) +
-
-      (
-        key === selectedDate
-          ? " selected"
-          : ""
-      );
-
+      (!inMonth ? " outside" : "") +
+      (key === todayKey ? " today" : "") +
+      (key === selectedDate ? " selected" : "");
 
     /*
-      [BADGE CHANGE 2]
+      New Badge presentation only:
 
-      旧显示：
-      日期 +「假期」
-      红色农历文字
-      活动
-      底部假期名称
+      1. 日期
+      2. 农历 Badge
+      3. 假期名称 Badge
+      4. 活动
 
-      新显示：
-      日期
-      农历 Badge + 假期名称 Badge
-      活动
+      不再显示泛称「假期」。
     */
 
-    const dateInfoBadge* =
-      lunarText ||
-      holida*Text
-
+    const dateInfoBadges =
+      lunarText || holidayText
         ? `
-          <div c*ass="date-info-badges">
+          <div class="date-info-badges">
 
-         *  ${
-              lunarText
-
-    *           ? `
-                  <*pan
-                    class="lun*r-badge"
-                    title*"农历：${escapeHTML(lunarText)}"
-    *             >
-                   *${escapeHTML(lunarText)}
-         *        </span>
-                `
-*                : ""
-            }*
             ${
-              holi*ayText
-
+              lunarText
                 ? `
-      *           <span
-                 *  class="holiday-badge"
-          *         title="${escapeHTML(holid*yText)}"
+                  <span
+                    class="lunar-badge"
+                    title="农历：${escapeHTML(lunarText)}"
                   >
-     *              ${escapeHTML(holiday*ext)}
+                    ${escapeHTML(lunarText)}
                   </span>
-  *             `
+                `
+                : ""
+            }
 
-                : *"
+            ${
+              holidayText
+                ? `
+                  <span
+                    class="holiday-badge"
+                    title="${escapeHTML(holidayText)}"
+                  >
+                    ${escapeHTML(holidayText)}
+                  </span>
+                `
+                : ""
             }
 
           </div>
-*       `
-
+        `
         : "";
 
-
-    html*+= `
+    html += `
       <div
-        class="${c*asses}"
-        data-date="${key}"*        tabindex="0"
-        role=*button"
-        aria-label="${esca*eHTML(key)}"
+        class="${classes}"
+        data-date="${key}"
+        tabindex="0"
+        role="button"
+        aria-label="${escapeHTML(key)}"
       >
 
-        <!--*          [BADGE CHANGE 3]
+        <div class="daynum">
+          ${date.getDate()}
+        </div>
 
-      *   删除原本日期旁边的「假期」字样。
-        -->
-
- *      <div class="daynum">
-       *  ${date.getDate()}
-        </div>*
-
-        <!--
-          [BADGE CH*NGE 4]
-
-          农历及假期名称统一放在活动上方。*        -->
-
-        ${dateInfoBad*es}
-
+        ${dateInfoBadges}
 
         ${
           events
-*            .slice(
-              *,
-              3
-            )
-
- *          .map(
-              even* => `
+            .slice(0, 3)
+            .map(
+              event => `
                 <span
-      *           class="event-chip${
-   *                isSchoolHoliday(ev*nt)
-                      ? " scho*l-holiday"
-                      :*""
+                  class="event-chip${
+                    isSchoolHoliday(event)
+                      ? " school-holiday"
+                      : ""
                   }"
                   title="${escapeHTML(event.title)}"
                 >
@@ -3266,20 +3175,16 @@ function renderCalendar() {
                 </span>
               `
             )
-
             .join("")
         }
 
-
         ${
           events.length > 3
-
             ? `
               <span class="event-chip more">
                 另有 ${events.length - 3} 项
               </span>
             `
-
             : ""
         }
 
@@ -3287,59 +3192,43 @@ function renderCalendar() {
     `;
   }
 
-
   $("days").innerHTML =
     html;
 
-
-  /*
-    以下点击日期的逻辑与 Working HTML 相同。
-  */
-
   $("days")
+    .querySelectorAll(".day")
+    .forEach(element => {
 
-    .querySelector*ll(
-      ".day"
-    )
+      const choose = () => {
+        selectedDate =
+          element.dataset.date;
 
-    .forEa*h(
-      element => {
+        render();
+      };
 
-        con*t choose =
-          () => {
+      element.addEventListener(
+        "click",
+        choose
+      );
 
-    *       selectedDate =
-            * element.dataset.date;
+      element.addEventListener(
+        "keydown",
+        event => {
 
-          * render();
-          };
-
-
-        *lement.addEventListener(
-         *"click",
-          choose
-        *;
-
-
-        element.addEventListen*r(
-          "keydown",
-          *vent => {
-
-            if (
-      *       event.key === "Enter" ||
-  *           event.key === " "
-     *      ) {
-              event.preventDefault();
-
-              choose();
-            }
-
+          if (
+            event.key === "Enter" ||
+            event.key === " "
+          ) {
+            event.preventDefault();
+            choose();
           }
-        );
 
-      }
-    );
+        }
+      );
+
+    });
 }
+
 
 /* =========================================================
    Event detail card
