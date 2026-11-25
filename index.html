@@ -10,18 +10,14 @@
 
 <style>
 
-/* =========================================================
-   GLOBAL
-   ========================================================= */
-
 :root {
-  --green: #356b5b;
-  --light-green: #e8f0e8;
-  --ink: #263d36;
-  --muted: #77847c;
-  --line: #e7e4da;
-  --bg: #f7f5ee;
-  --gold: #c5a16b;
+  --green: #376b5b;
+  --light-green: #e7f1ec;
+  --ink: #273444;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --bg: #f4f6f5;
+  --gold: #c58d45;
 }
 
 * {
@@ -33,6 +29,635 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    "Microsoft YaHei",
+    sans-serif;
+}
+
+
+/* ===== Header and Logo ===== */
+
+header {
+  background:
+    linear-gradient(
+      135deg,
+      #244f45,
+      #477a68
+    );
+
+  color: white;
+
+  padding:
+    24px 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 22px;
+
+  text-align: left;
+
+  overflow: visible;
+}
+
+.logo-frame {
+  width: 100px;
+  height: 100px;
+
+  flex:
+    0 0 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: visible;
+}
+
+.site-logo {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center center;
+
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: 0;
+}
+
+.header-text {
+  min-width: 0;
+}
+
+header h1 {
+  margin: 0;
+
+  font-size:
+    clamp(24px, 4vw, 36px);
+
+  letter-spacing: .06em;
+
+  line-height: 1.35;
+}
+
+header p {
+  margin:
+    7px 0 0;
+
+  color: #e4eee9;
+
+  line-height: 1.5;
+}
+
+header .english-name {
+  font-size: 12px;
+
+  letter-spacing: 1.5px;
+
+  color: #e7d6b6;
+}
+
+
+/* ===== Main layout ===== */
+
+main {
+  max-width: 1200px;
+
+  margin:
+    22px auto;
+
+  padding:
+    0 16px 40px;
+}
+
+.toolbar {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  background: white;
+
+  padding: 14px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 14px;
+
+  margin-bottom: 16px;
+}
+
+.controls {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  align-items: center;
+}
+
+button,
+input {
+  font: inherit;
+
+  border:
+    1px solid #d1d5db;
+
+  border-radius: 9px;
+
+  padding:
+    9px 12px;
+
+  background: white;
+
+  color: var(--ink);
+}
+
+button {
+  cursor: pointer;
+}
+
+button.primary {
+  background: var(--green);
+
+  color: white;
+
+  border-color: var(--green);
+}
+
+button:hover {
+  border-color: #8bb4a4;
+}
+
+button:disabled {
+  opacity: .6;
+
+  cursor: wait;
+}
+
+#monthLabel {
+  font-size: 20px;
+
+  font-weight: 700;
+
+  min-width: 135px;
+
+  text-align: center;
+}
+
+.layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.7fr)
+    minmax(280px, 1fr);
+
+  gap: 16px;
+}
+
+.panel {
+  background: white;
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  min-width: 0;
+}
+
+.panel-head {
+  padding:
+    15px 17px;
+
+  border-bottom:
+    1px solid var(--line);
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  align-items: center;
+}
+
+.panel-head h2 {
+  font-size: 17px;
+
+  margin: 0;
+}
+
+.status {
+  font-size: 12px;
+
+  color: var(--muted);
+}
+
+
+/* ===== Calendar ===== */
+
+.calendar {
+  padding: 12px;
+}
+
+.weekdays,
+.days {
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, minmax(0, 1fr));
+
+  gap: 5px;
+}
+
+.weekdays div {
+  text-align: center;
+
+  color: var(--muted);
+
+  font-size: 12px;
+
+  padding:
+    8px 0;
+}
+
+.day {
+  border:
+    1px solid #edf0ef;
+
+  min-height: 100px;
+
+  border-radius: 9px;
+
+  padding: 6px;
+
+  background: white;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  min-width: 0;
+}
+
+.day:hover {
+  border-color: #8bb4a4;
+
+  background: #fbfdfc;
+}
+
+.day.outside {
+  background: #f8f9f8;
+
+  color: #a6adb4;
+}
+
+.day.today {
+  border:
+    2px solid var(--gold);
+}
+
+.day.selected {
+  background: var(--light-green);
+
+  border-color: var(--green);
+}
+
+.daynum {
+  font-size: 13px;
+
+  font-weight: 700;
+
+  margin-bottom: 5px;
+}
+
+.event-chip {
+  display: block;
+
+  background: #e8f1ed;
+
+  color: #285c4c;
+
+  border-left:
+    3px solid #548b76;
+
+  border-radius: 4px;
+
+  padding:
+    3px 4px;
+
+  margin:
+    3px 0;
+
+  font-size: 11px;
+
+  line-height: 1.3;
+
+  overflow-wrap: anywhere;
+}
+
+.event-chip.more {
+  background: #f3f4f6;
+
+  color: #59616b;
+
+  border-left-color: #9ca3af;
+}
+
+
+/* ===== Event list ===== */
+
+.side-content {
+  padding:
+    14px 16px;
+}
+
+.event-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.event {
+  padding: 11px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 10px;
+}
+
+.event h3 {
+  margin:
+    5px 0;
+
+  font-size: 15px;
+}
+
+.event p {
+  margin:
+    4px 0;
+
+  color: #586270;
+
+  font-size: 13px;
+
+  white-space: pre-wrap;
+
+  overflow-wrap: anywhere;
+}
+
+.event .date {
+  font-size: 12px;
+
+  font-weight: 700;
+
+  color: var(--green);
+}
+
+.empty {
+  padding:
+    25px 10px;
+
+  text-align: center;
+
+  color: var(--muted);
+}
+
+.error {
+  margin:
+    12px 0;
+
+  padding:
+    12px 14px;
+
+  background: #fff1f0;
+
+  color: #9f2d25;
+
+  border:
+    1px solid #ffd2ce;
+
+  border-radius: 10px;
+
+  display: none;
+
+  white-space: pre-wrap;
+
+  overflow-wrap: anywhere;
+}
+
+.footnote {
+  color: var(--muted);
+
+  font-size: 12px;
+
+  margin-top: 14px;
+
+  line-height: 1.5;
+}
+
+.pill {
+  display: inline-block;
+
+  font-size: 10px;
+
+  border-radius: 20px;
+
+  padding:
+    2px 6px;
+
+  background: #f4eadb;
+
+  color: #86591c;
+
+  margin-left: 3px;
+}
+
+footer {
+  max-width: 1200px;
+
+  margin:
+    0 auto;
+
+  padding:
+    0 16px 28px;
+
+  text-align: center;
+
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+@media(max-width: 850px) {
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .day {
+    min-height: 80px;
+
+    padding: 4px;
+  }
+
+  .event-chip {
+    font-size: 10px;
+  }
+
+  .toolbar {
+    align-items: flex-start;
+  }
+
+  #monthLabel {
+    min-width: 110px;
+  }
+
+}
+
+@media(max-width: 520px) {
+
+  header {
+    gap: 12px;
+
+    padding:
+      18px 12px;
+  }
+
+  .logo-frame {
+    width: 70px;
+    height: 70px;
+
+    flex-basis: 70px;
+  }
+
+  header h1 {
+    font-size: 21px;
+
+    letter-spacing: 0;
+  }
+
+  header p {
+    font-size: 12px;
+  }
+
+  header .english-name {
+    font-size: 9px;
+
+    letter-spacing: .7px;
+  }
+
+  main {
+    padding:
+      0 8px 25px;
+
+    margin-top: 12px;
+  }
+
+  .calendar {
+    padding: 5px;
+  }
+
+  .weekdays,
+  .days {
+    gap: 2px;
+  }
+
+  .day {
+    min-height: 65px;
+
+    border-radius: 5px;
+  }
+
+  .daynum {
+    font-size: 12px;
+  }
+
+  .event-chip {
+    font-size: 9px;
+
+    padding: 2px;
+  }
+
+  .toolbar {
+    padding: 10px;
+  }
+
+  .controls {
+    gap: 5px;
+  }
+
+  button,
+  input {
+    padding: 8px;
+
+    font-size: 13px;
+  }
+
+}
+
+@media(max-width: 360px) {
+
+  header {
+    gap: 9px;
+  }
+
+  .logo-frame {
+    width: 58px;
+    height: 58px;
+
+    flex-basis: 58px;
+  }
+
+  header h1 {
+    font-size: 18px;
+  }
+
+  header .english-name {
+    font-size: 8px;
+  }
+
+}
+
+
+/* ===== Calm, welcoming visual refresh ===== */
+
+:root {
+  --green: #456b5c;
+  --light-green: #e8eee8;
+  --ink: #303a36;
+  --muted: #7b827c;
+  --line: #e4e4dc;
+  --bg: #f5f3ed;
+  --gold: #b99561;
+}
+
+body {
+  background: var(--bg);
+
+  color: var(--ink);
+
+  font-family:
     "Noto Sans SC",
     "Microsoft YaHei",
     system-ui,
@@ -41,29 +666,432 @@ body {
   letter-spacing: .01em;
 }
 
+header {
+  min-height: 310px;
 
-/* =========================================================
-   HEADER
-   ========================================================= */
+  position: relative;
+
+  isolation: isolate;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(27,48,42,.78),
+      rgba(27,48,42,.42) 58%,
+      rgba(27,48,42,.15)
+    ),
+    linear-gradient(
+      0deg,
+      rgba(27,48,42,.32),
+      transparent 58%
+    ),
+    url("./main-building.png")
+    center 46% / cover no-repeat;
+
+  color: #fffdf7;
+
+  padding:
+    38px clamp(20px, 6vw, 80px);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-start;
+
+  gap: 24px;
+
+  text-align: left;
+
+  overflow: hidden;
+}
+
+header::after {
+  content: "";
+
+  position: absolute;
+
+  z-index: -1;
+
+  inset: 0;
+
+  border-bottom:
+    4px solid rgba(201,174,129,.85);
+
+  pointer-events: none;
+}
+
+.logo-frame {
+  width: 108px;
+  height: 108px;
+
+  flex:
+    0 0 108px;
+
+  padding: 7px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255,253,247,.96);
+
+  box-shadow:
+    0 8px 28px rgba(0,0,0,.18);
+
+  overflow: hidden;
+}
+
+.header-text {
+  max-width: 720px;
+
+  min-width: 0;
+
+  text-shadow:
+    0 2px 18px rgba(0,0,0,.22);
+}
+
+header h1 {
+  font-size:
+    clamp(28px, 4.2vw, 46px);
+
+  line-height: 1.25;
+
+  letter-spacing: .08em;
+
+  font-weight: 650;
+}
+
+header p {
+  margin-top: 12px;
+
+  color:
+    rgba(255,253,247,.92);
+
+  font-size: 15px;
+
+  line-height: 1.8;
+}
+
+header .english-name {
+  font-size: 11px;
+
+  letter-spacing: .19em;
+
+  color: #e9d9bd;
+
+  margin-top: 8px;
+}
+
+main {
+  max-width: 1320px;
+
+  margin:
+    30px auto 0;
+
+  padding:
+    0 22px 48px;
+}
+
+.toolbar {
+  border:
+    1px solid rgba(215,213,202,.9);
+
+  border-radius: 18px;
+
+  padding:
+    16px 18px;
+
+  box-shadow:
+    0 8px 28px rgba(48,58,54,.045);
+
+  gap: 14px;
+}
+
+button,
+input {
+  border-color: #deded4;
+
+  border-radius: 10px;
+
+  padding:
+    10px 14px;
+
+  background: #fffefa;
+
+  transition:
+    border-color .18s ease,
+    background .18s ease,
+    transform .18s ease;
+}
+
+button:hover {
+  border-color: #9aaf9f;
+}
+
+button:active {
+  transform:
+    translateY(1px);
+}
+
+button.primary {
+  background: var(--green);
+
+  border-color: var(--green);
+
+  color: #fffdf7;
+}
+
+button.primary:hover {
+  background: #355648;
+}
+
+#monthLabel {
+  color: #3c5147;
+
+  font-size: 19px;
+}
+
+.layout {
+  grid-template-columns:
+    minmax(0, 1.65fr)
+    minmax(300px, .95fr);
+
+  gap: 20px;
+}
+
+.panel {
+  border:
+    1px solid #e4e1d7;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 8px 28px rgba(48,58,54,.045);
+}
+
+.panel-head {
+  padding:
+    17px 20px;
+
+  background: #fbfaf6;
+
+  border-bottom-color: #ebe8de;
+}
+
+.panel-head h2 {
+  color: #40594d;
+
+  font-size: 17px;
+
+  letter-spacing: .04em;
+}
+
+.status {
+  color: #858b83;
+}
+
+.calendar {
+  padding: 14px;
+}
+
+.weekdays div {
+  color: #81877e;
+
+  font-size: 12px;
+
+  letter-spacing: .08em;
+
+  padding:
+    9px 0 11px;
+}
+
+.weekdays div:first-child {
+  color: #b27d70;
+}
+
+.days {
+  gap: 6px;
+}
+
+.day {
+  min-height: 104px;
+
+  border-color: #eeece4;
+
+  border-radius: 11px;
+
+  padding: 8px;
+
+  background: #fffefa;
+
+  transition:
+    border-color .16s ease,
+    background .16s ease,
+    box-shadow .16s ease;
+}
+
+.day:hover {
+  border-color: #b7c7b8;
+
+  background: #fafbf7;
+}
+
+.day.outside {
+  background: #f7f6f1;
+
+  color: #b8b9b1;
+}
+
+.day.today {
+  border:
+    2px solid #c7a46f;
+}
+
+.day.selected {
+  background: #edf2eb;
+
+  border-color: #668675;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(102,134,117,.12);
+}
+
+.daynum {
+  color: #4c574f;
+
+  font-size: 13px;
+
+  margin-bottom: 7px;
+}
+
+.event-chip {
+  background: #e9f0e9;
+
+  color: #456452;
+
+  border-left-color: #8ca692;
+
+  border-radius: 5px;
+
+  padding:
+    4px 5px;
+
+  margin:
+    4px 0;
+
+  font-size: 11px;
+}
+
+.event-chip.more {
+  background: #f3f0e8;
+
+  color: #817660;
+
+  border-left-color: #c8b58f;
+}
+
+.side-content {
+  padding: 17px;
+}
+
+.event {
+  border-color: #e8e5dc;
+
+  border-radius: 12px;
+
+  padding: 14px;
+
+  background: #fffefa;
+}
+
+.event h3 {
+  color: #3f5c4d;
+
+  line-height: 1.5;
+}
+
+.event p {
+  line-height: 1.65;
+}
+
+.event .date {
+  color: #64806d;
+}
+
+.empty {
+  color: #8a8e86;
+}
+
+.footnote {
+  padding:
+    12px 13px;
+
+  background: #f7f5ef;
+
+  border-radius: 10px;
+
+  line-height: 1.8;
+}
+
+footer {
+  max-width: none;
+
+  padding:
+    22px 16px 30px;
+
+  background: #e9e8df;
+
+  color: #7b8078;
+
+  line-height: 1.8;
+}
+
+
+/* ===== Warm, calm calendar redesign ===== */
+
+:root {
+  --green: #356b5b;
+  --light-green: #e8f0e8;
+  --ink: #263d36;
+  --muted: #77847c;
+  --line: #e7e4da;
+  --bg: #f7f5ee;
+  --gold: #c5a16b;
+}
+
+body {
+  background: var(--bg);
+
+  color: var(--ink);
+
+  font-family:
+    "Noto Sans SC",
+    "Microsoft YaHei",
+    system-ui,
+    sans-serif;
+
+  letter-spacing: .01em;
+}
 
 header {
   min-height: 390px;
 
   position: relative;
+
   isolation: isolate;
 
   display: flex;
+
   flex-direction: column;
 
   align-items: stretch;
+
   justify-content: flex-start;
 
   gap: 0;
 
   padding:
-    28px
-    clamp(20px, 6vw, 88px)
-    42px;
+    28px clamp(20px, 6vw, 88px) 42px;
 
   color: var(--green);
 
@@ -92,6 +1120,7 @@ header::before {
   content: "";
 
   position: absolute;
+
   z-index: -1;
 
   inset: auto 0 0;
@@ -110,6 +1139,7 @@ header::after {
   content: "";
 
   position: absolute;
+
   z-index: -1;
 
   inset: auto 0 0;
@@ -120,13 +1150,9 @@ header::after {
     rgba(177,158,119,.5);
 }
 
-
-/* =========================================================
-   BRAND
-   ========================================================= */
-
 .brand-row {
   display: flex;
+
   align-items: center;
 
   gap: 20px;
@@ -138,7 +1164,8 @@ header::after {
   width: 104px;
   height: 104px;
 
-  flex: 0 0 104px;
+  flex:
+    0 0 104px;
 
   padding: 5px;
 
@@ -162,6 +1189,8 @@ header::after {
 
 .header-text {
   min-width: 0;
+
+  text-shadow: none;
 }
 
 header h1 {
@@ -186,7 +1215,8 @@ header h1 {
 }
 
 header p {
-  margin: 8px 0 0;
+  margin:
+    8px 0 0;
 
   color: #567064;
 
@@ -212,11 +1242,6 @@ header .motto {
 
   color: #9a8158;
 }
-
-
-/* =========================================================
-   HERO
-   ========================================================= */
 
 .hero-caption {
   max-width: 650px;
@@ -267,15 +1292,11 @@ header .motto {
   margin-top: 15px;
 }
 
-
-/* =========================================================
-   MAIN
-   ========================================================= */
-
 main {
   max-width: 1500px;
 
-  margin: -8px auto 0;
+  margin:
+    -8px auto 0;
 
   padding:
     0 24px 48px;
@@ -283,22 +1304,7 @@ main {
   position: relative;
 }
 
-
-/* =========================================================
-   TOOLBAR
-   ========================================================= */
-
 .toolbar {
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 14px;
-
-  align-items: center;
-
-  justify-content: space-between;
-
   border:
     1px solid rgba(226,222,210,.95);
 
@@ -310,28 +1316,17 @@ main {
   box-shadow:
     0 8px 28px rgba(48,58,54,.045);
 
+  gap: 14px;
+
   background:
     rgba(255,254,250,.96);
 
   margin-bottom: 18px;
 }
 
-.controls {
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 8px;
-
-  align-items: center;
-}
-
 button,
 input {
-  font: inherit;
-
-  border:
-    1px solid #dedfd5;
+  border-color: #dedfd5;
 
   border-radius: 11px;
 
@@ -346,10 +1341,6 @@ input {
     border-color .18s ease,
     background .18s ease,
     transform .18s ease;
-}
-
-button {
-  cursor: pointer;
 }
 
 button:hover {
@@ -373,32 +1364,13 @@ button.primary:hover {
   background: #2d5b4d;
 }
 
-button:disabled {
-  opacity: .6;
-
-  cursor: wait;
-}
-
 #monthLabel {
   color: #3c594c;
 
   font-size: 19px;
-
-  font-weight: 700;
-
-  min-width: 135px;
-
-  text-align: center;
 }
 
-
-/* =========================================================
-   LAYOUT
-   ========================================================= */
-
 .layout {
-  display: grid;
-
   grid-template-columns:
     minmax(0, 1.55fr)
     minmax(320px, 1fr);
@@ -417,10 +1389,6 @@ button:disabled {
 
   background:
     rgba(255,254,250,.97);
-
-  overflow: hidden;
-
-  min-width: 0;
 }
 
 .panel-head {
@@ -429,21 +1397,10 @@ button:disabled {
 
   background: #fbfaf6;
 
-  border-bottom:
-    1px solid #ebe8de;
-
-  display: flex;
-
-  justify-content: space-between;
-
-  gap: 10px;
-
-  align-items: center;
+  border-bottom-color: #ebe8de;
 }
 
 .panel-head h2 {
-  margin: 0;
-
   color: #355d4d;
 
   font-size: 17px;
@@ -452,33 +1409,14 @@ button:disabled {
 }
 
 .status {
-  font-size: 12px;
-
   color: #858b83;
 }
-
-
-/* =========================================================
-   CALENDAR
-   ========================================================= */
 
 .calendar {
   padding: 14px;
 }
 
-.weekdays,
-.days {
-  display: grid;
-
-  grid-template-columns:
-    repeat(7, minmax(0, 1fr));
-
-  gap: 6px;
-}
-
 .weekdays div {
-  text-align: center;
-
   color: #81877e;
 
   font-size: 12px;
@@ -493,23 +1431,20 @@ button:disabled {
   color: #b27d70;
 }
 
+.days {
+  gap: 6px;
+}
+
 .day {
   min-height: 104px;
 
-  border:
-    1px solid #eeece4;
+  border-color: #eeece4;
 
   border-radius: 11px;
 
   padding: 8px;
 
   background: #fffefa;
-
-  cursor: pointer;
-
-  overflow: hidden;
-
-  min-width: 0;
 
   transition:
     border-color .16s ease,
@@ -540,8 +1475,7 @@ button:disabled {
   border-color: #668675;
 
   box-shadow:
-    inset 0 0 0 1px
-    rgba(102,134,117,.12);
+    inset 0 0 0 1px rgba(102,134,117,.12);
 }
 
 .daynum {
@@ -549,25 +1483,15 @@ button:disabled {
 
   font-size: 13px;
 
-  font-weight: 700;
-
   margin-bottom: 7px;
 }
 
-
-/* =========================================================
-   CALENDAR EVENT CHIP
-   ========================================================= */
-
 .event-chip {
-  display: block;
-
   background: #e9f0e9;
 
   color: #456452;
 
-  border-left:
-    3px solid #8ca692;
+  border-left-color: #8ca692;
 
   border-radius: 5px;
 
@@ -578,10 +1502,6 @@ button:disabled {
     4px 0;
 
   font-size: 11px;
-
-  line-height: 1.3;
-
-  overflow-wrap: anywhere;
 }
 
 .event-chip.more {
@@ -592,39 +1512,12 @@ button:disabled {
   border-left-color: #c8b58f;
 }
 
-
-/* =========================================================
-   SCHOOL HOLIDAY
-   ========================================================= */
-
-.event-chip.school-holiday {
-  background: #e7f0fb;
-
-  color: #285b91;
-
-  border-left-color: #5b91c8;
-}
-
-
-/* =========================================================
-   SIDE EVENT LIST
-   ========================================================= */
-
 .side-content {
   padding: 17px;
 }
 
-.event-list {
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 10px;
-}
-
 .event {
-  border:
-    1px solid #e8e5dc;
+  border-color: #e8e5dc;
 
   border-radius: 12px;
 
@@ -633,165 +1526,25 @@ button:disabled {
   background: #fffefa;
 }
 
-.event.school-holiday {
-  background: #f5f9ff;
-
-  border-color: #c9dcef;
-}
-
 .event h3 {
-  margin:
-    5px 0;
-
   color: #3f5c4d;
-
-  font-size: 15px;
 
   line-height: 1.5;
 }
 
-.event.school-holiday h3 {
-  color: #285b91;
-}
-
 .event p {
-  margin:
-    4px 0;
-
-  color: #586270;
-
-  font-size: 13px;
-
   line-height: 1.65;
-
-  white-space: pre-wrap;
-
-  overflow-wrap: anywhere;
 }
 
 .event .date {
-  font-size: 12px;
-
-  font-weight: 700;
-
   color: #64806d;
 }
 
-
-/* =========================================================
-   TIME DETAIL
-   ========================================================= */
-
-.event-time {
-  display: flex;
-
-  align-items: flex-start;
-
-  gap: 5px;
-
-  padding:
-    7px 9px;
-
-  border-radius: 8px;
-
-  background: #edf4ef;
-
-  color: #355f50 !important;
-
-  font-weight: 600;
-}
-
-
-/* =========================================================
-   RECURRENCE DETAIL
-   ========================================================= */
-
-.event-repeat {
-  display: flex;
-
-  align-items: flex-start;
-
-  gap: 5px;
-
-  padding:
-    7px 9px;
-
-  border-radius: 8px;
-
-  background: #f7f3e8;
-
-  color: #78643f !important;
-}
-
-.event-detail-icon {
-  display: inline-flex;
-
-  width: 16px;
-
-  flex:
-    0 0 16px;
-
-  justify-content: center;
-
-  font-size: 15px;
-
-  line-height: 1.25;
-}
-
-.event-description {
-  margin-top:
-    9px !important;
-
-  padding-top: 9px;
-
-  border-top:
-    1px solid #ece9df;
-}
-
-
-/* =========================================================
-   OTHER
-   ========================================================= */
-
 .empty {
-  padding:
-    25px 10px;
-
-  text-align: center;
-
-  color: var(--muted);
-}
-
-.error {
-  margin:
-    12px 0;
-
-  padding:
-    12px 14px;
-
-  background: #fff1f0;
-
-  color: #9f2d25;
-
-  border:
-    1px solid #ffd2ce;
-
-  border-radius: 10px;
-
-  display: none;
-
-  white-space: pre-wrap;
-
-  overflow-wrap: anywhere;
+  color: #8a8e86;
 }
 
 .footnote {
-  color: var(--muted);
-
-  font-size: 12px;
-
-  margin-top: 14px;
-
   padding:
     12px 13px;
 
@@ -802,49 +1555,87 @@ button:disabled {
   line-height: 1.8;
 }
 
-.pill {
-  display: inline-block;
-
-  font-size: 10px;
-
-  border-radius: 20px;
-
-  padding:
-    2px 6px;
-
-  background: #f4eadb;
-
-  color: #86591c;
-
-  margin-left: 3px;
-}
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
 footer {
   max-width: none;
 
   padding:
     22px 16px 30px;
 
-  text-align: center;
-
   background: #e9e8df;
 
   color: #7b8078;
-
-  font-size: 12px;
 
   line-height: 1.8;
 }
 
 
-/* =========================================================
-   TABLET
-   ========================================================= */
+/* ===== Special styling: school holidays ===== */
+
+.event-chip.school-holiday {
+  background: #e7f0fb;
+
+  color: #285b91;
+
+  border-left-color: #5b91c8;
+}
+
+.event.school-holiday {
+  background: #f5f9ff;
+
+  border-color: #c9dcef;
+}
+
+.event.school-holiday h3 {
+  color: #285b91;
+}
+
+.event.school-holiday .date {
+  color: #4d7eae;
+}
+
+
+/* ===== NEW: Activity time in detail panel ===== */
+
+.event .event-time {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 6px;
+
+  margin:
+    8px 0;
+
+  padding:
+    7px 9px;
+
+  background: #edf4ef;
+
+  color: #355f50;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+}
+
+.event-time-icon {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 17px;
+
+  min-width: 17px;
+
+  line-height: 1.25;
+
+  font-size: 15px;
+}
+
+
+/* ===== Responsive final overrides ===== */
 
 @media(max-width: 850px) {
 
@@ -869,12 +1660,8 @@ footer {
   .day {
     min-height: 84px;
   }
+
 }
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
 
 @media(max-width: 520px) {
 
@@ -896,7 +1683,6 @@ footer {
 
   .logo-frame {
     width: 66px;
-
     height: 66px;
 
     flex-basis: 66px;
@@ -979,8 +1765,6 @@ footer {
 
   .event-chip {
     font-size: 9px;
-
-    padding: 2px;
   }
 
   .weekdays,
@@ -988,21 +1772,13 @@ footer {
     gap: 3px;
   }
 
-  .event-time,
-  .event-repeat {
+  .event .event-time {
     padding:
       6px 8px;
 
-    font-size:
-      12px !important;
+    font-size: 12px;
   }
 
-  button,
-  input {
-    padding: 8px;
-
-    font-size: 13px;
-  }
 }
 
 </style>
@@ -1010,11 +1786,6 @@ footer {
 
 
 <body>
-
-
-<!-- ======================================================
-     HEADER
-     ====================================================== -->
 
 <header>
 
@@ -1033,7 +1804,9 @@ footer {
 
     <div class="header-text">
 
-      <h1>美里佛教居士林</h1>
+      <h1>
+        美里佛教居士林
+      </h1>
 
       <p class="english-name">
         PERTUBUHAN UGAMA BUDDHA (1993) MIRI
@@ -1067,14 +1840,7 @@ footer {
 </header>
 
 
-<!-- ======================================================
-     MAIN
-     ====================================================== -->
-
 <main>
-
-
-  <!-- TOOLBAR -->
 
   <div class="toolbar">
 
@@ -1120,8 +1886,6 @@ footer {
   </div>
 
 
-  <!-- ERROR -->
-
   <div
     id="errorBox"
     class="error"
@@ -1129,12 +1893,7 @@ footer {
   ></div>
 
 
-  <!-- LAYOUT -->
-
   <div class="layout">
-
-
-    <!-- CALENDAR -->
 
     <section class="panel">
 
@@ -1157,7 +1916,6 @@ footer {
       <div class="calendar">
 
         <div class="weekdays">
-
           <div>日</div>
           <div>一</div>
           <div>二</div>
@@ -1165,7 +1923,6 @@ footer {
           <div>四</div>
           <div>五</div>
           <div>六</div>
-
         </div>
 
         <div
@@ -1177,8 +1934,6 @@ footer {
 
     </section>
 
-
-    <!-- EVENT DETAILS -->
 
     <section class="panel">
 
@@ -1230,20 +1985,16 @@ footer {
 </footer>
 
 
-<!-- ======================================================
-     JAVASCRIPT
-     ====================================================== -->
-
 <script>
 
 "use strict";
 
 
 /* =========================================================
-   GOOGLE SHEETS CSV
+   Google Sheets CSV links
 
    IMPORTANT:
-   把你原本的两个 CSV URL 填回这里
+   把你目前正在使用的 CSV URL 填回这里。
    ========================================================= */
 
 const ACTIVITY_CSV_URL =
@@ -1251,14 +2002,6 @@ const ACTIVITY_CSV_URL =
 
 const DATE_INFO_CSV_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vTcmNKJ322HzGxtlRqsQNQ-1DLRq-LXcivKuWEt7DWfXnf_EpofCpUkzbL9FUvK_WSxH0RaHbsCs5mY/pub?gid=688612611&single=true&output=csv";
-
-
-/* =========================================================
-   CALENDAR SETTINGS
-   ========================================================= */
-
-const CALENDAR_END =
-  new Date(2027, 11, 31);
 
 
 let activities = [];
@@ -1287,13 +2030,13 @@ const norm = value =>
   clean(value)
     .toLowerCase()
     .replace(
-      /[\s_\-()（）:：/？?]+/g,
+      /[\s_\-()（）:：/]+/g,
       ""
     );
 
 
 /* =========================================================
-   HTML ESCAPE
+   HTML escape
    ========================================================= */
 
 function escapeHTML(value) {
@@ -1314,7 +2057,7 @@ function escapeHTML(value) {
 
 
 /* =========================================================
-   CSV PARSER
+   CSV parser
    ========================================================= */
 
 function parseCSV(text) {
@@ -1461,7 +2204,7 @@ function parseCSV(text) {
 
 
 /* =========================================================
-   DATE FUNCTIONS
+   Date functions
    ========================================================= */
 
 function validDate(
@@ -1489,65 +2232,69 @@ function validDate(
 }
 
 
-/* =========================================================
-   PARSE DATE
-   ========================================================= */
+/*
+  Original date parser retained.
+*/
 
 function parseDate(value) {
 
-  const text =
+  const s =
     clean(value);
 
 
-  if (!text) {
+  if (!s) {
 
     return null;
 
   }
 
 
-  let match;
+  let m;
 
 
-  /* yyyy-mm-dd */
+  /*
+    yyyy-mm-dd
+    yyyy/mm/dd
+    yyyy.mm.dd
+  */
 
-  match =
-    text.match(
-      /^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})(?:$|T|\s)/
-    );
+  m = s.match(
+    /^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})(?:$|T|\s)/
+  );
 
 
-  if (match) {
+  if (m) {
 
     return validDate(
-      Number(match[1]),
-      Number(match[2]),
-      Number(match[3])
+      Number(m[1]),
+      Number(m[2]),
+      Number(m[3])
     );
 
   }
 
 
-  /* Malaysian dd/mm/yyyy */
+  /*
+    dd/mm/yyyy
+    dd-mm-yyyy
+    dd.mm.yyyy
+  */
 
-  match =
-    text.match(
-      /^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{4})$/
-    );
+  m = s.match(
+    /^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/
+  );
 
 
-  if (match) {
+  if (m) {
 
     return validDate(
-      Number(match[3]),
-      Number(match[2]),
-      Number(match[1])
+      Number(m[3]),
+      Number(m[2]),
+      Number(m[1])
     );
 
   }
 
-
-  /* English month names */
 
   const months = {
 
@@ -1590,23 +2337,25 @@ function parseDate(value) {
   };
 
 
-  /* 13-Feb-27 */
+  /*
+    13-Feb-27
+    13 Feb 2027
+  */
 
-  match =
-    text.match(
-      /^(\d{1,2})[\s\-\/]([A-Za-z]{3,9})[\s,\-\/]+(\d{2,4})$/
-    );
+  m = s.match(
+    /^(\d{1,2})[\s\-\/]([A-Za-z]{3,9})[\s,\-\/]+(\d{2,4})$/
+  );
 
 
   if (
-    match &&
+    m &&
     months[
-      match[2].toLowerCase()
+      m[2].toLowerCase()
     ] !== undefined
   ) {
 
     let year =
-      Number(match[3]);
+      Number(m[3]);
 
 
     if (
@@ -1626,64 +2375,72 @@ function parseDate(value) {
       year,
 
       months[
-        match[2].toLowerCase()
+        m[2].toLowerCase()
       ] + 1,
 
-      Number(match[1])
+      Number(m[1])
 
     );
 
   }
 
 
-  /* Feb 13, 2027 */
+  /*
+    Feb 13, 2027
+  */
 
-  match =
-    text.match(
-      /^([A-Za-z]{3,9})\s+(\d{1,2}),?\s+(\d{4})$/
-    );
+  m = s.match(
+    /^([A-Za-z]{3,9})\s+(\d{1,2}),?\s+(\d{4})$/
+  );
 
 
   if (
-    match &&
+    m &&
     months[
-      match[1].toLowerCase()
+      m[1].toLowerCase()
     ] !== undefined
   ) {
 
     return validDate(
 
-      Number(match[3]),
+      Number(m[3]),
 
       months[
-        match[1].toLowerCase()
+        m[1].toLowerCase()
       ] + 1,
 
-      Number(match[2])
+      Number(m[2])
 
     );
 
   }
 
 
-  /* Excel / Google Sheets serial */
+  /*
+    Google Sheets serial date
+  */
 
   if (
     /^\d{5}(?:\.0+)?$/
-      .test(text)
+      .test(s)
   ) {
 
     const date =
       new Date(
+
         Date.UTC(
           1899,
           11,
           30
-        ) +
+        )
+
+        +
+
         Math.floor(
-          Number(text)
+          Number(s)
         ) *
         86400000
+
       );
 
 
@@ -1701,7 +2458,7 @@ function parseDate(value) {
 
 
   const parsed =
-    new Date(text);
+    new Date(s);
 
 
   if (
@@ -1727,10 +2484,6 @@ function parseDate(value) {
 
 }
 
-
-/* =========================================================
-   DATE KEY
-   ========================================================= */
 
 function dateKey(date) {
 
@@ -1759,22 +2512,15 @@ function fromKey(key) {
     );
 
 
-  if (!match) {
+  return match
 
-    return null;
+    ? new Date(
+        Number(match[1]),
+        Number(match[2]) - 1,
+        Number(match[3])
+      )
 
-  }
-
-
-  return new Date(
-
-    Number(match[1]),
-
-    Number(match[2]) - 1,
-
-    Number(match[3])
-
-  );
+    : null;
 
 }
 
@@ -1800,17 +2546,18 @@ function addDays(
 
 
 /* =========================================================
-   TIME PARSER
+   NEW: Time formatting
 
-   Support:
+   Supported examples:
    08:30
    08:30:00
+   19:30:00
    8.30 am
    7.30 pm
-   Excel decimal time
+   Excel decimal time such as 0.354166667
    ========================================================= */
 
-function parseTimeParts(value) {
+function formatTime(value) {
 
   const text =
     clean(value);
@@ -1818,12 +2565,14 @@ function parseTimeParts(value) {
 
   if (!text) {
 
-    return null;
+    return "";
 
   }
 
 
-  /* Excel decimal time */
+  /*
+    Excel or Google Sheets decimal time.
+  */
 
   if (
     /^(?:0?\.\d+|1(?:\.0+)?)$/
@@ -1857,24 +2606,50 @@ function parseTimeParts(value) {
       }
 
 
-      return {
+      const hour =
+        Math.floor(
+          totalMinutes / 60
+        );
 
-        hour:
-          Math.floor(
-            totalMinutes / 60
-          ),
 
-        minute:
-          totalMinutes % 60
+      const minute =
+        totalMinutes % 60;
 
-      };
+
+      const period =
+        hour >= 12
+          ? "PM"
+          : "AM";
+
+
+      const displayHour =
+        hour % 12 || 12;
+
+
+      return (
+
+        `${displayHour}:` +
+
+        `${String(minute).padStart(2, "0")} ` +
+
+        `${period}`
+
+      );
 
     }
 
   }
 
 
-  /* Normal time */
+  /*
+    Normal time values:
+    08:30
+    08:30:00
+    8.30
+    8.30 am
+    7.30 pm
+    19:30:00
+  */
 
   const match =
     text.match(
@@ -1882,9 +2657,13 @@ function parseTimeParts(value) {
     );
 
 
+  /*
+    Retain unfamiliar time text instead of hiding it.
+  */
+
   if (!match) {
 
-    return null;
+    return text;
 
   }
 
@@ -1892,8 +2671,10 @@ function parseTimeParts(value) {
   let hour =
     Number(match[1]);
 
+
   const minute =
     Number(match[2]);
+
 
   const period =
     clean(match[3])
@@ -1901,11 +2682,13 @@ function parseTimeParts(value) {
 
 
   if (
-    hour > 23 ||
+    !Number.isInteger(hour) ||
+    !Number.isInteger(minute) ||
+    minute < 0 ||
     minute > 59
   ) {
 
-    return null;
+    return text;
 
   }
 
@@ -1917,7 +2700,7 @@ function parseTimeParts(value) {
       hour > 12
     ) {
 
-      return null;
+      return text;
 
     }
 
@@ -1943,63 +2726,42 @@ function parseTimeParts(value) {
 
   }
 
+  else if (
+    hour < 0 ||
+    hour > 23
+  ) {
 
-  return {
-
-    hour,
-
-    minute
-
-  };
-
-}
-
-
-/* =========================================================
-   FORMAT TIME
-   ========================================================= */
-
-function formatTime(value) {
-
-  const parts =
-    parseTimeParts(value);
-
-
-  if (!parts) {
-
-    return clean(value);
+    return text;
 
   }
 
 
-  const period =
-    parts.hour >= 12
+  const displayPeriod =
+    hour >= 12
       ? "PM"
       : "AM";
 
 
   const displayHour =
-    parts.hour % 12 || 12;
+    hour % 12 || 12;
 
 
   return (
 
     `${displayHour}:` +
 
-    `${String(
-      parts.minute
-    ).padStart(2, "0")} ` +
+    `${String(minute).padStart(2, "0")} ` +
 
-    `${period}`
+    `${displayPeriod}`
 
   );
 
 }
 
 
-/* =========================================================
-   ACTIVITY TIME
-   ========================================================= */
+/*
+  Combine start and end time for the detail panel.
+*/
 
 function activityTime(activity) {
 
@@ -2048,39 +2810,7 @@ function activityTime(activity) {
 }
 
 
-/* =========================================================
-   TIME SORT
-   ========================================================= */
-
-function timeSortNumber(value) {
-
-  const parts =
-    parseTimeParts(value);
-
-
-  if (!parts) {
-
-    return (
-      Number.MAX_SAFE_INTEGER
-    );
-
-  }
-
-
-  return (
-
-    parts.hour * 60 +
-
-    parts.minute
-
-  );
-
-}
-
-
-/* =========================================================
-   DETECT HEADER
-   ========================================================= */
+/* ==================================================================================================== */
 
 function rowsToObjects(rows) {
 
@@ -2112,7 +2842,7 @@ function rowsToObjects(rows) {
     const score =
       cells.filter(
         cell =>
-          /activity|event|活动|title|名称|startdate|开始日期|date|日期|开始时间|频率|重复至/
+          /activity|event|活动|title|名称|startdate|开始日期|date|日期/
             .test(cell)
       ).length;
 
@@ -2182,10 +2912,6 @@ function rowsToObjects(rows) {
 }
 
 
-/* =========================================================
-   GET COLUMN VALUE
-   ========================================================= */
-
 function getValue(
   object,
   patterns
@@ -2202,7 +2928,9 @@ function getValue(
             pattern.test(
               norm(key)
             )
-        ) &&
+        )
+
+        &&
 
         clean(value) !== ""
 
@@ -2210,14 +2938,19 @@ function getValue(
 
 
   return entry
+
     ? clean(entry[1])
+
     : "";
 
 }
 
 
 /* =========================================================
-   DETECT ACTIVITIES
+   Read activities
+
+   Only new fields:
+   startTime and endTime
    ========================================================= */
 
 function detectActivities(rows) {
@@ -2235,8 +2968,6 @@ function detectActivities(rows) {
       ) => {
 
 
-        /* Activity name */
-
         const title =
           getValue(
             object,
@@ -2253,8 +2984,6 @@ function detectActivities(rows) {
             ]
           );
 
-
-        /* Start date */
 
         const startRaw =
           getValue(
@@ -2275,8 +3004,6 @@ function detectActivities(rows) {
           );
 
 
-        /* End date */
-
         const endRaw =
           getValue(
             object,
@@ -2292,7 +3019,10 @@ function detectActivities(rows) {
           );
 
 
-        /* Start time */
+        /*
+          NEW:
+          Start time
+        */
 
         const startTime =
           getValue(
@@ -2309,7 +3039,10 @@ function detectActivities(rows) {
           );
 
 
-        /* End time */
+        /*
+          NEW:
+          End time
+        */
 
         const endTime =
           getValue(
@@ -2326,7 +3059,9 @@ function detectActivities(rows) {
           );
 
 
-        /* Internal enabled */
+        /*
+          Original internal enable logic.
+        */
 
         const internalEnabled =
           getValue(
@@ -2346,7 +3081,7 @@ function detectActivities(rows) {
 
 
         /*
-        Public enabled column
+          Original public enable logic.
         */
 
         const publicHeaderExists =
@@ -2363,16 +3098,10 @@ function detectActivities(rows) {
           getValue(
             object,
             [
-
-              /^大众启用$/,
-
-              /大众启用/
-
+              /^大众启用\??$/
             ]
           );
 
-
-        /* Category */
 
         const category =
           getValue(
@@ -2390,8 +3119,6 @@ function detectActivities(rows) {
             ]
           );
 
-
-        /* Location */
 
         const location =
           getValue(
@@ -2412,8 +3139,6 @@ function detectActivities(rows) {
           );
 
 
-        /* Owner */
-
         const owner =
           getValue(
             object,
@@ -2430,8 +3155,6 @@ function detectActivities(rows) {
             ]
           );
 
-
-        /* Description */
 
         const description =
           getValue(
@@ -2452,7 +3175,9 @@ function detectActivities(rows) {
           );
 
 
-        /* Frequency */
+        /*
+          Original recurrence logic retained.
+        */
 
         const recurrence =
           getValue(
@@ -2473,7 +3198,9 @@ function detectActivities(rows) {
           );
 
 
-        /* Repeat until */
+        /*
+          Original repeat-until logic retained.
+        */
 
         const repeatUntilRaw =
           getValue(
@@ -2508,8 +3235,6 @@ function detectActivities(rows) {
           );
 
 
-        /* Must have title and start date */
-
         if (
           !title ||
           !start
@@ -2519,8 +3244,6 @@ function detectActivities(rows) {
 
         }
 
-
-        /* Check internal enable */
 
         if (
           /^(false|no|n|0|inactive|disabled|否|停用)$/i
@@ -2534,14 +3257,10 @@ function detectActivities(rows) {
         }
 
 
-        /* Check public enable */
-
         if (
           publicHeaderExists &&
           !/^是$/i.test(
-            clean(
-              publicEnabled
-            )
+            clean(publicEnabled)
           )
         ) {
 
@@ -2561,9 +3280,17 @@ function detectActivities(rows) {
 
           end,
 
+          /*
+            NEW time fields.
+          */
+
           startTime,
 
           endTime,
+
+          /*
+            Original fields retained.
+          */
 
           repeatUntil,
 
@@ -2588,304 +3315,10 @@ function detectActivities(rows) {
 
 
 /* =========================================================
-   RECURRENCE MODE
-
-   Supported:
-   单次
-   每日
-   每周
-   每两周
-   每月
-   每年
+   Original recurrence expansion retained
    ========================================================= */
 
-function recurrenceMode(value) {
-
-  const rule =
-    clean(
-      value || "单次"
-    ).toLowerCase();
-
-
-  /* Single */
-
-  if (
-
-    !rule ||
-
-    /^(none|no|never|无|不重复|一次|one.?time|单次)$/i
-      .test(rule)
-
-  ) {
-
-    return "single";
-
-  }
-
-
-  /* Daily */
-
-  if (
-    /^(daily|每日|每天|日重复)$/
-      .test(rule)
-  ) {
-
-    return "daily";
-
-  }
-
-
-  /* Weekly */
-
-  if (
-    /^(weekly|每周|星期|周重复)$/
-      .test(rule)
-  ) {
-
-    return "weekly";
-
-  }
-
-
-  /* Biweekly */
-
-  if (
-    /^(biweekly|fortnightly|每两周|每隔两周)$/
-      .test(rule)
-  ) {
-
-    return "biweekly";
-
-  }
-
-
-  /* Monthly */
-
-  if (
-    /^(monthly|每月|月重复)$/
-      .test(rule)
-  ) {
-
-    return "monthly";
-
-  }
-
-
-  /* Yearly */
-
-  if (
-    /^(yearly|annually|每年|每年度)$/
-      .test(rule)
-  ) {
-
-    return "yearly";
-
-  }
-
-
-  return "";
-
-}
-
-
-/* =========================================================
-   RECURRENCE LABEL
-   ========================================================= */
-
-function recurrenceLabel(value) {
-
-  const mode =
-    recurrenceMode(value);
-
-
-  const labels = {
-
-    single:
-      "单次",
-
-    daily:
-      "每日",
-
-    weekly:
-      "每周",
-
-    biweekly:
-      "每两周",
-
-    monthly:
-      "每月",
-
-    yearly:
-      "每年"
-
-  };
-
-
-  return (
-    labels[mode] ||
-    clean(value)
-  );
-
-}
-
-
-/* =========================================================
-   EFFECTIVE REPEAT UNTIL
-
-   If repeat-until is blank:
-   defaults to 31 Dec 2027
-   ========================================================= */
-
-function effectiveRepeatUntil(
-  activity
-) {
-
-  const requestedEnd =
-
-    activity.repeatUntil ||
-
-    CALENDAR_END;
-
-
-  return new Date(
-
-    Math.min(
-
-      requestedEnd.getTime(),
-
-      CALENDAR_END.getTime()
-
-    )
-
-  );
-
-}
-
-
-/* =========================================================
-   CHECK RECURRENCE
-   ========================================================= */
-
-function recurrenceMatches(
-  activity,
-  date,
-  mode
-) {
-
-  const start =
-    activity.start;
-
-
-  const daysFromStart =
-    Math.round(
-
-      (
-
-        Date.UTC(
-
-          date.getFullYear(),
-
-          date.getMonth(),
-
-          date.getDate()
-
-        )
-
-        -
-
-        Date.UTC(
-
-          start.getFullYear(),
-
-          start.getMonth(),
-
-          start.getDate()
-
-        )
-
-      )
-
-      /
-
-      86400000
-
-    );
-
-
-  if (
-    mode === "daily"
-  ) {
-
-    return true;
-
-  }
-
-
-  if (
-    mode === "weekly"
-  ) {
-
-    return (
-      daysFromStart % 7 === 0
-    );
-
-  }
-
-
-  if (
-    mode === "biweekly"
-  ) {
-
-    return (
-      daysFromStart % 14 === 0
-    );
-
-  }
-
-
-  if (
-    mode === "monthly"
-  ) {
-
-    return (
-      date.getDate() ===
-      start.getDate()
-    );
-
-  }
-
-
-  if (
-    mode === "yearly"
-  ) {
-
-    return (
-
-      date.getMonth() ===
-      start.getMonth()
-
-      &&
-
-      date.getDate() ===
-      start.getDate()
-
-    );
-
-  }
-
-
-  return false;
-
-}
-
-
-/* =========================================================
-   EXPAND ACTIVITIES
-   ========================================================= */
-
-function expandActivities(
-  items
-) {
+function expandActivities(items) {
 
   const expanded = [];
 
@@ -2894,56 +3327,45 @@ function expandActivities(
     const activity of items
   ) {
 
-    const mode =
-      recurrenceMode(
-        activity.recurrence
-      );
+    const start =
+      activity.start;
 
 
-    /* Unknown frequency */
-
-    if (!mode) {
-
-      console.warn(
-        "未识别的活动频率：",
-        activity.title,
-        activity.recurrence
-      );
+    const end =
+      activity.end || start;
 
 
-      continue;
+    const rule =
+      clean(
+        activity.recurrence ||
+        "单次"
+      ).toLowerCase();
 
-    }
+
+    const isSingle =
+
+      !rule
+
+      ||
+
+      /^(none|no|never|无|不重复|一次|one.?time|单次)$/i
+        .test(rule);
 
 
-    /* =====================================================
-       SINGLE / MULTI-DAY
-       ===================================================== */
+    /*
+      Single activity and multi-day activity.
+    */
 
-    if (
-      mode === "single"
-    ) {
-
-      const stopDate =
-
-        activity.end &&
-        activity.end >= activity.start
-
-        ? activity.end
-
-        : activity.start;
-
+    if (isSingle) {
 
       for (
 
         let date =
-          new Date(
-            activity.start
-          ),
+          new Date(start),
 
         count = 0;
 
-        date <= stopDate &&
+        date <= end &&
         count < 370;
 
         date =
@@ -2961,13 +3383,7 @@ function expandActivities(
           ...activity,
 
           date:
-            dateKey(date),
-
-          recurrenceMode:
-            mode,
-
-          effectiveRepeatUntil:
-            null
+            dateKey(date)
 
         });
 
@@ -2979,26 +3395,115 @@ function expandActivities(
     }
 
 
-    /* =====================================================
-       RECURRING
-       ===================================================== */
+    /*
+      Original frequency options.
+    */
 
-    const stopDate =
-      effectiveRepeatUntil(
-        activity
+    const mode =
+
+      /^(daily|每日|每天|日重复)$/
+        .test(rule)
+
+      ? "daily"
+
+      :
+
+      /^(weekly|每周|星期|周重复)$/
+        .test(rule)
+
+      ? "weekly"
+
+      :
+
+      /^(biweekly|fortnightly|每两周|每隔两周)$/
+        .test(rule)
+
+      ? "biweekly"
+
+      :
+
+      /^(monthly|每月|月重复)$/
+        .test(rule)
+
+      ? "monthly"
+
+      :
+
+      /^(yearly|annually|每年|每年度)$/
+        .test(rule)
+
+      ? "yearly"
+
+      : "";
+
+
+    /*
+      Do not manufacture activity dates
+      for an unknown frequency.
+    */
+
+    if (!mode) {
+
+      console.warn(
+
+        "未识别的活动频率：",
+
+        activity.title,
+
+        activity.recurrence
+
+      );
+
+
+      continue;
+
+    }
+
+
+    /*
+      If repeat-until is blank,
+      default to 31 December 2027.
+    */
+
+    const lastDate =
+
+      activity.repeatUntil
+
+      ||
+
+      new Date(
+        2027,
+        11,
+        31
+      );
+
+
+    const stop =
+      new Date(
+
+        Math.min(
+
+          lastDate.getTime(),
+
+          new Date(
+            2027,
+            11,
+            31
+          ).getTime()
+
+        )
+
       );
 
 
     for (
 
       let date =
-        new Date(
-          activity.start
-        ),
+        new Date(start),
 
       count = 0;
 
-      date <= stopDate &&
+      date <= stop &&
       count < 500;
 
       date =
@@ -3011,28 +3516,71 @@ function expandActivities(
 
     ) {
 
-      if (
-        recurrenceMatches(
-          activity,
-          date,
-          mode
+      const daysFromStart =
+        Math.round(
+
+          (
+            date.getTime() -
+            start.getTime()
+          )
+
+          /
+
+          86400000
+
+        );
+
+
+      const match =
+
+        mode === "daily"
+
+        ||
+
+        (
+          mode === "weekly" &&
+          daysFromStart % 7 === 0
         )
-      ) {
+
+        ||
+
+        (
+          mode === "biweekly" &&
+          daysFromStart % 14 === 0
+        )
+
+        ||
+
+        (
+          mode === "monthly" &&
+          date.getDate() ===
+          start.getDate()
+        )
+
+        ||
+
+        (
+          mode === "yearly" &&
+          date.getMonth() ===
+          start.getMonth() &&
+          date.getDate() ===
+          start.getDate()
+        );
+
+
+      if (match) {
+
+        /*
+          {...activity} automatically retains
+          startTime and endTime.
+        */
 
         expanded.push({
 
           ...activity,
 
           date:
-            dateKey(date),
-
-          recurrenceMode:
-            mode,
-
-          effectiveRepeatUntil:
-            new Date(
-              stopDate
-            )
+            dateKey(date)
 
         });
 
@@ -3049,7 +3597,7 @@ function expandActivities(
 
 
 /* =========================================================
-   DATE INFO
+   Date information
    ========================================================= */
 
 function parseDateInfo(rows) {
@@ -3058,6 +3606,7 @@ function parseDateInfo(rows) {
 
     .map(
       object => {
+
 
         const raw =
           getValue(
@@ -3148,21 +3697,10 @@ function parseDateInfo(rows) {
 
 
 /* =========================================================
-   FETCH CSV
+   Fetch CSV
    ========================================================= */
 
 async function fetchCSV(url) {
-
-  if (
-    !clean(url)
-  ) {
-
-    throw new Error(
-      "CSV URL 尚未填写。"
-    );
-
-  }
-
 
   const response =
     await fetch(
@@ -3231,7 +3769,7 @@ async function fetchCSV(url) {
 
 
 /* =========================================================
-   LOAD DATA
+   Load data
    ========================================================= */
 
 async function loadData() {
@@ -3268,7 +3806,7 @@ async function loadData() {
 
       console.error(
 
-        "活动 CSV 前20行：",
+        "活动 CSV 前 20 行：",
 
         activityRows.slice(
           0,
@@ -3287,42 +3825,26 @@ async function loadData() {
     }
 
 
-    /* Expand recurrence */
-
     activities =
       expandActivities(
         parsed
       );
 
 
-    /* Date info optional */
+    /*
+      Date information is optional.
+    */
 
     try {
 
-      if (
-        clean(
-          DATE_INFO_CSV_URL
-        )
-      ) {
+      dateInfo =
+        parseDateInfo(
 
-        const dateRows =
           await fetchCSV(
             DATE_INFO_CSV_URL
-          );
+          )
 
-
-        dateInfo =
-          parseDateInfo(
-            dateRows
-          );
-
-      }
-
-      else {
-
-        dateInfo = [];
-
-      }
+        );
 
     }
 
@@ -3374,13 +3896,9 @@ async function loadData() {
 
       error.message +
 
-      "\n\n如果出现 Failed to fetch，" +
+      "\n\n如果出现 Failed to fetch，可能是网络或跨站请求问题。" +
 
-      "可能是网络或跨站请求问题。" +
-
-      "\n如果提示无法识别活动，" +
-
-      "请检查 Google Sheets 的实际表头。";
+      "如果提示无法识别活动，则需要根据实际 CSV 表头调整识别规则。";
 
 
     $("errorBox").style.display =
@@ -3408,7 +3926,7 @@ async function loadData() {
 
 
 /* =========================================================
-   DATE INFO LOOKUP
+   Filtering and sorting
    ========================================================= */
 
 function infoFor(key) {
@@ -3423,24 +3941,13 @@ function infoFor(key) {
 }
 
 
-/* =========================================================
-   SEARCH
-   ========================================================= */
-
-function matchesSearch(
-  activity
-) {
-
-  if (
-    !searchTerm
-  ) {
-
-    return true;
-
-  }
-
+function matchesSearch(activity) {
 
   return (
+
+    !searchTerm
+
+    ||
 
     [
 
@@ -3452,15 +3959,7 @@ function matchesSearch(
 
       activity.owner,
 
-      activity.description,
-
-      activity.startTime,
-
-      activity.endTime,
-
-      recurrenceLabel(
-        activity.recurrence
-      )
+      activity.description
 
     ]
 
@@ -3477,13 +3976,15 @@ function matchesSearch(
 }
 
 
-/* =========================================================
-   EVENT PRIORITY
-   ========================================================= */
+/*
+  Same-day display order:
+  Public holiday
+  School holiday
+  Youth group
+  Other activities
+*/
 
-function eventPriority(
-  activity
-) {
+function eventPriority(activity) {
 
   const title =
     clean(
@@ -3529,10 +4030,6 @@ function eventPriority(
 }
 
 
-/* =========================================================
-   SORT ACTIVITIES
-   ========================================================= */
-
 function compareActivities(
   first,
   second
@@ -3542,16 +4039,6 @@ function compareActivities(
 
     eventPriority(first) -
     eventPriority(second)
-
-    ||
-
-    timeSortNumber(
-      first.startTime
-    )
-    -
-    timeSortNumber(
-      second.startTime
-    )
 
     ||
 
@@ -3568,13 +4055,7 @@ function compareActivities(
 }
 
 
-/* =========================================================
-   SCHOOL HOLIDAY
-   ========================================================= */
-
-function isSchoolHoliday(
-  activity
-) {
+function isSchoolHoliday(activity) {
 
   return clean(
     activity.title
@@ -3584,10 +4065,6 @@ function isSchoolHoliday(
 
 }
 
-
-/* =========================================================
-   ACTIVITIES FOR DATE
-   ========================================================= */
 
 function activityOn(key) {
 
@@ -3614,11 +4091,10 @@ function activityOn(key) {
 
 
 /* =========================================================
-   RENDER CALENDAR
+   Render calendar
 
-   Notice:
-   TIME IS NOT SHOWN HERE.
-   Time only appears in Detail panel.
+   Time is intentionally not shown
+   inside the calendar cells.
    ========================================================= */
 
 function renderCalendar() {
@@ -3727,7 +4203,7 @@ function renderCalendar() {
         data-date="${key}"
         tabindex="0"
         role="button"
-        aria-label="${escapeHTML(key)}"
+        aria-label="${key}"
       >
 
         <div class="daynum">
@@ -3738,9 +4214,9 @@ function renderCalendar() {
             info &&
             info.holiday
 
-            ? '<span class="pill">假期</span>'
+              ? '<span class="pill">假期</span>'
 
-            : ""
+              : ""
           }
 
         </div>
@@ -3750,21 +4226,21 @@ function renderCalendar() {
           info &&
           info.lunar
 
-          ? `
+            ? `
 
-            <div
-              style="
-                font-size:10px;
-                color:#b54747;
-                margin-bottom:3px;
-              "
-            >
-              ${escapeHTML(info.lunar)}
-            </div>
+              <div
+                style="
+                  font-size:10px;
+                  color:#b54747;
+                  margin-bottom:3px
+                "
+              >
+                ${escapeHTML(info.lunar)}
+              </div>
 
-          `
+            `
 
-          : ""
+            : ""
         }
 
 
@@ -3790,9 +4266,7 @@ function renderCalendar() {
                     }
                   "
 
-                  title="
-                    ${escapeHTML(event.title)}
-                  "
+                  title="${escapeHTML(event.title)}"
 
                 >
 
@@ -3811,17 +4285,17 @@ function renderCalendar() {
         ${
           events.length > 3
 
-          ? `
+            ? `
 
-            <span class="event-chip more">
+              <span class="event-chip more">
 
-              另有 ${events.length - 3} 项
+                另有 ${events.length - 3} 项
 
-            </span>
+              </span>
 
-          `
+            `
 
-          : ""
+            : ""
         }
 
 
@@ -3829,22 +4303,22 @@ function renderCalendar() {
           info &&
           info.holiday
 
-          ? `
+            ? `
 
-            <div
-              style="
-                font-size:10px;
-                color:#9a6a2d;
-              "
-            >
+              <div
+                style="
+                  font-size:10px;
+                  color:#9a6a2d
+                "
+              >
 
-              ${escapeHTML(info.holiday)}
+                ${escapeHTML(info.holiday)}
 
-            </div>
+              </div>
 
-          `
+            `
 
-          : ""
+            : ""
         }
 
 
@@ -3859,8 +4333,6 @@ function renderCalendar() {
     html;
 
 
-  /* Click date */
-
   $("days")
 
     .querySelectorAll(
@@ -3871,7 +4343,7 @@ function renderCalendar() {
       element => {
 
 
-        const chooseDate =
+        const choose =
           () => {
 
 
@@ -3888,7 +4360,7 @@ function renderCalendar() {
 
           "click",
 
-          chooseDate
+          choose
 
         );
 
@@ -3910,11 +4382,9 @@ function renderCalendar() {
 
             ) {
 
-
               event.preventDefault();
 
-
-              chooseDate();
+              choose();
 
             }
 
@@ -3929,88 +4399,13 @@ function renderCalendar() {
 
 
 /* =========================================================
-   RECURRENCE DETAIL TEXT
+   Event detail card
+
+   NEW:
+   Time appears only here.
    ========================================================= */
 
-function recurrenceDetail(
-  activity
-) {
-
-  const mode =
-    recurrenceMode(
-      activity.recurrence
-    );
-
-
-  /* Don't show Single */
-
-  if (
-    !mode ||
-    mode === "single"
-  ) {
-
-    return "";
-
-  }
-
-
-  const label =
-    recurrenceLabel(
-      activity.recurrence
-    );
-
-
-  const untilDate =
-
-    activity.effectiveRepeatUntilty
-    );
-
-
-  if (!untilDate) {
-
-    return label;
-
-  }
-
-
-  const untilText =
-    untilDate
-      .toLocaleDateString(
-
-        "zh-MY",
-
-        {
-
-          year:
-            "numeric",
-
-          month:
-            "long",
-
-          day:
-            "numeric"
-
-        }
-
-      );
-
-
-  return (
-
-    `${label}，至 ${untilText}`
-
-  );
-
-}
-
-
-/* =========================================================
-   EVENT DETAIL CARD
-   ========================================================= */
-
-function eventCard(
-  activity
-) {
+function eventCard(activity) {
 
   const date =
     fromKey(
@@ -4022,43 +4417,33 @@ function eventCard(
 
     date
 
-    ? date.toLocaleDateString(
+      ? date.toLocaleDateString(
 
-        "zh-MY",
+          "zh-MY",
 
-        {
+          {
 
-          year:
-            "numeric",
+            year:
+              "numeric",
 
-          month:
-            "short",
+            month:
+              "short",
 
-          day:
-            "numeric",
+            day:
+              "numeric",
 
-          weekday:
-            "short"
+            weekday:
+              "short"
 
-        }
+          }
 
-      )
+        )
 
-    : activity.date;
+      : activity.date;
 
-
-  /* NEW: TIME */
 
   const timeText =
     activityTime(
-      activity
-    );
-
-
-  /* NEW: RECURRENCE */
-
-  const repeatText =
-    recurrenceDetail(
       activity
     );
 
@@ -4077,7 +4462,6 @@ function eventCard(
 
     >
 
-
       <div class="date">
 
         ${escapeHTML(dateText)}
@@ -4092,151 +4476,99 @@ function eventCard(
       </h3>
 
 
-      <!-- TIME -->
-
       ${
         timeText
 
-        ? `
+          ? `
 
-          <p class="event-time">
+            <p class="event-time">
 
-            <span
-              class="event-detail-icon"
-              aria-hidden="true"
-            >
-              ◷
-            </span>
+              <span
+                class="event-time-icon"
+                aria-hidden="true"
+              >
+                ◷
+              </span>
 
-            <strong>
-              时间：
-            </strong>
+              <strong>
+                时间：
+              </strong>
 
-            ${escapeHTML(timeText)}
+              ${escapeHTML(timeText)}
 
-          </p>
+            </p>
 
-        `
+          `
 
-        : ""
+          : ""
       }
 
-
-      <!-- RECURRENCE -->
-
-      ${
-        repeatText
-
-        ? `
-
-          <p class="event-repeat">
-
-            <span
-              class="event-detail-icon"
-              aria-hidden="true"
-            >
-              ↻
-            </span>
-
-            <strong>
-              重复：
-            </strong>
-
-            ${escapeHTML(repeatText)}
-
-          </p>
-
-        `
-
-        : ""
-      }
-
-
-      <!-- CATEGORY -->
 
       ${
         activity.category
 
-        ? `
+          ? `
 
-          <p>
+            <p>
 
-            <strong>
-              类别：
-            </strong>
+              类别：${escapeHTML(activity.category)}
 
-            ${escapeHTML(activity.category)}
+            </p>
 
-          </p>
+          `
 
-        `
-
-        : ""
+          : ""
       }
 
-
-      <!-- LOCATION -->
 
       ${
         activity.location
 
-        ? `
+          ? `
 
-          <p>
+            <p>
 
-            <strong>
-              地点：
-            </strong>
+              地点：${escapeHTML(activity.location)}
 
-            ${escapeHTML(activity.location)}
+            </p>
 
-          </p>
+          `
 
-        `
-
-        : ""
+          : ""
       }
 
-
-      <!-- OWNER -->
 
       ${
         activity.owner
 
-        ? `
+          ? `
 
-          <p>
+            <p>
 
-            <strong>
-              负责人：
-            </strong>
+              负责人：${escapeHTML(activity.owner)}
 
-            ${escapeHTML(activity.owner)}
+            </p>
 
-          </p>
+          `
 
-        `
-
-        : ""
+          : ""
       }
 
-
-      <!-- DESCRIPTION -->
 
       ${
         activity.description
 
-        ? `
+          ? `
 
-          <p class="event-description">
+            <p>
 
-            ${escapeHTML(activity.description)}
+              ${escapeHTML(activity.description)}
 
-          </p>
+            </p>
 
-        `
+          `
 
-        : ""
+          : ""
       }
 
 
@@ -4248,7 +4580,7 @@ function eventCard(
 
 
 /* =========================================================
-   RENDER EVENT LIST
+   Render event list
    ========================================================= */
 
 function renderList() {
@@ -4264,8 +4596,6 @@ function renderList() {
   let title;
 
 
-  /* Selected date */
-
   if (
     selectedDate
   ) {
@@ -4280,41 +4610,10 @@ function renderList() {
       );
 
 
-    const selected =
-      fromKey(
-        selectedDate
-      );
-
-
     title =
-
-      selected
-
-      ? `${selected.toLocaleDateString(
-
-          "zh-MY",
-
-          {
-
-            year:
-              "numeric",
-
-            month:
-              "long",
-
-            day:
-              "numeric"
-
-          }
-
-        )} 的活动`
-
-      : `${selectedDate} 的活动`;
+      `${selectedDate} 的活动`;
 
   }
-
-
-  /* Entire month */
 
   else {
 
@@ -4355,14 +4654,12 @@ function renderList() {
 
       searchTerm
 
-      ? "搜索结果"
+        ? "搜索结果"
 
-      : `${viewDate.getFullYear()} 年 ${viewDate.getMonth() + 1} 月活动`;
+        : `${viewDate.getFullYear()} 年 ${viewDate.getMonth() + 1} 月活动`;
 
   }
 
-
-  /* Sort by date then priority/time */
 
   list.sort(
 
@@ -4393,8 +4690,6 @@ function renderList() {
     `${list.length} 项`;
 
 
-  /* Empty */
-
   if (
     !list.length
   ) {
@@ -4406,9 +4701,9 @@ function renderList() {
         ${
           searchTerm
 
-          ? "没有找到符合条件的活动。"
+            ? "没有找到符合条件的活动。"
 
-          : "这一天 / 这个月份暂时没有活动。"
+            : "这一天 / 这个月份暂时没有活动。"
         }
 
       </div>
@@ -4420,8 +4715,6 @@ function renderList() {
 
   }
 
-
-  /* Render */
 
   $("eventList").innerHTML =
 
@@ -4444,17 +4737,17 @@ function renderList() {
 
       list.length > 150
 
-      ? `
+        ? `
 
-        <div class="empty">
+          <div class="empty">
 
-          仅显示前 150 项，请缩小搜索范围。
+            仅显示前 150 项，请缩小搜索范围。
 
-        </div>
+          </div>
 
-      `
+        `
 
-      : ""
+        : ""
 
     );
 
@@ -4462,7 +4755,7 @@ function renderList() {
 
 
 /* =========================================================
-   MAIN RENDER
+   Main render
    ========================================================= */
 
 function render() {
@@ -4475,7 +4768,7 @@ function render() {
 
 
 /* =========================================================
-   PREVIOUS MONTH
+   Buttons
    ========================================================= */
 
 $("prevBtn")
@@ -4508,10 +4801,6 @@ $("prevBtn")
   );
 
 
-/* =========================================================
-   NEXT MONTH
-   ========================================================= */
-
 $("nextBtn")
   .addEventListener(
 
@@ -4541,10 +4830,6 @@ $("nextBtn")
 
   );
 
-
-/* =========================================================
-   TODAY
-   ========================================================= */
 
 $("todayBtn")
   .addEventListener(
@@ -4581,10 +4866,6 @@ $("todayBtn")
   );
 
 
-/* =========================================================
-   MANUAL REFRESH
-   ========================================================= */
-
 $("refreshBtn")
   .addEventListener(
 
@@ -4594,10 +4875,6 @@ $("refreshBtn")
 
   );
 
-
-/* =========================================================
-   SEARCH
-   ========================================================= */
 
 $("searchInput")
   .addEventListener(
@@ -4624,18 +4901,13 @@ $("searchInput")
 
 
 /* =========================================================
-   INITIAL LOAD
+   Initial load and auto-refresh
    ========================================================= */
 
 render();
 
 loadData();
 
-
-/* =========================================================
-   AUTOMATIC REFRESH
-   Every 5 minutes
-   ========================================================= */
 
 setInterval(
 
