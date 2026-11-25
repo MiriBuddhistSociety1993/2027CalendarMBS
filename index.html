@@ -1597,41 +1597,50 @@ footer {
 /* ===== NEW: Activity time in detail panel ===== */
 
 .event .event-time {
-  display: flex;
+  display: block;
 
-  align-items: flex-start;
-
-  gap: 6px;
-
-  margin:
-    8px 0;
-
-  padding:
-    7px 9px;
+  margin: 8px 0;
+  padding: 8px 10px;
 
   background: #edf4ef;
-
   color: #355f50;
 
   border-radius: 8px;
 
   font-weight: 600;
+  font-size: 13px;
+  line-height: 1.5;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .event-time-icon {
-  display: inline-flex;
+  display: inline;
+  margin-right: 4px;
 
-  align-items: center;
+  font-size: 14px;
+  vertical-align: baseline;
+}
 
-  justify-content: center;
+/* Mobile */
+@media(max-width: 520px) {
 
-  width: 17px;
+  .event .event-time {
+    margin: 7px 0;
+    padding: 7px 9px;
 
-  min-width: 17px;
+    font-size: 12px;
+    line-height: 1.45;
 
-  line-height: 1.25;
+    white-space: nowrap;
+  }
 
-  font-size: 15px;
+  .event-time-icon {
+    font-size: 13px;
+    margin-right: 3px;
+  }
 }
 
 
