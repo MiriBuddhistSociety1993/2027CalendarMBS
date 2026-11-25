@@ -10,13 +10,13 @@
 
 <style>
 :root {
-  --green: #356b5b;
-  --light-green: #e8f0e8;
-  --ink: #263d36;
-  --muted: #77847c;
-  --line: #e7e4da;
-  --bg: #f7f5ee;
-  --gold: #c5a16b;
+  --green: #376b5b;
+  --light-green: #e7f1ec;
+  --ink: #273444;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --bg: #f4f6f5;
+  --gold: #c58d45;
 }
 
 * {
@@ -28,20 +28,540 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    "Microsoft YaHei",
+    sans-serif;
+}
+
+
+/* ===== Header and Logo ===== */
+
+header {
+  background:
+    linear-gradient(
+      135deg,
+      #244f45,
+      #477a68
+    );
+
+  color: white;
+  padding: 24px 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 22px;
+  text-align: left;
+  overflow: visible;
+}
+
+.logo-frame {
+  width: 100px;
+  height: 100px;
+  flex: 0 0 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: visible;
+}
+
+.site-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center center;
+
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: 0;
+}
+
+.header-text {
+  min-width: 0;
+}
+
+header h1 {
+  margin: 0;
+
+  font-size:
+    clamp(24px, 4vw, 36px);
+
+  letter-spacing: .06em;
+  line-height: 1.35;
+}
+
+header p {
+  margin: 7px 0 0;
+  color: #e4eee9;
+  line-height: 1.5;
+}
+
+header .english-name {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: #e7d6b6;
+}
+
+
+/* ===== Main layout ===== */
+
+main {
+  max-width: 1200px;
+  margin: 22px auto;
+  padding: 0 16px 40px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  align-items: center;
+  justify-content: space-between;
+
+  background: white;
+  padding: 14px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+button,
+input {
+  font: inherit;
+
+  border:
+    1px solid #d1d5db;
+
+  border-radius: 9px;
+  padding: 9px 12px;
+
+  background: white;
+  color: var(--ink);
+}
+
+button {
+  cursor: pointer;
+}
+
+button.primary {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+
+button:hover {
+  border-color: #8bb4a4;
+}
+
+button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+#monthLabel {
+  min-width: 135px;
+
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.7fr)
+    minmax(280px, 1fr);
+
+  gap: 16px;
+}
+
+.panel {
+  background: white;
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 14px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.panel-head {
+  padding: 15px 17px;
+
+  border-bottom:
+    1px solid var(--line);
+
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.panel-head h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.status {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+
+/* ===== Calendar ===== */
+
+.calendar {
+  padding: 12px;
+}
+
+.weekdays,
+.days {
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, minmax(0, 1fr));
+
+  gap: 5px;
+}
+
+.weekdays div {
+  padding: 8px 0;
+
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.day {
+  min-width: 0;
+  min-height: 100px;
+
+  padding: 6px;
+  overflow: hidden;
+
+  background: white;
+
+  border:
+    1px solid #edf0ef;
+
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.day:hover {
+  border-color: #8bb4a4;
+  background: #fbfdfc;
+}
+
+.day.outside {
+  background: #f8f9f8;
+  color: #a6adb4;
+}
+
+.day.today {
+  border:
+    2px solid var(--gold);
+}
+
+.day.selected {
+  background: var(--light-green);
+  border-color: var(--green);
+}
+
+.daynum {
+  margin-bottom: 5px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.event-chip {
+  display: block;
+
+  margin: 3px 0;
+  padding: 3px 4px;
+
+  background: #e8f1ed;
+  color: #285c4c;
+
+  border-left:
+    3px solid #548b76;
+
+  border-radius: 4px;
+
+  font-size: 11px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.event-chip.more {
+  background: #f3f4f6;
+  color: #59616b;
+  border-left-color: #9ca3af;
+}
+
+
+/* ===== Event list ===== */
+
+.side-content {
+  padding: 14px 16px;
+}
+
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.event {
+  padding: 11px;
+
+  border:
+    1px solid var(--line);
+
+  border-radius: 10px;
+}
+
+.event h3 {
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+.event p {
+  margin: 4px 0;
+
+  color: #586270;
+  font-size: 13px;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.event .date {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.empty {
+  padding: 25px 10px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.error {
+  display: none;
+
+  margin: 12px 0;
+  padding: 12px 14px;
+
+  background: #fff1f0;
+  color: #9f2d25;
+
+  border:
+    1px solid #ffd2ce;
+
+  border-radius: 10px;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.footnote {
+  margin-top: 14px;
+
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.pill {
+  display: inline-block;
+
+  margin-left: 3px;
+  padding: 2px 6px;
+
+  background: #f4eadb;
+  color: #86591c;
+
+  border-radius: 20px;
+  font-size: 10px;
+}
+
+footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px 28px;
+
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
+/* ===== Base responsive layout ===== */
+
+@media(max-width: 850px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .day {
+    min-height: 80px;
+    padding: 4px;
+  }
+
+  .event-chip {
+    font-size: 10px;
+  }
+
+  .toolbar {
+    align-items: flex-start;
+  }
+
+  #monthLabel {
+    min-width: 110px;
+  }
+}
+
+@media(max-width: 520px) {
+  header {
+    gap: 12px;
+    padding: 18px 12px;
+  }
+
+  .logo-frame {
+    width: 70px;
+    height: 70px;
+    flex-basis: 70px;
+  }
+
+  header h1 {
+    font-size: 21px;
+    letter-spacing: 0;
+  }
+
+  header p {
+    font-size: 12px;
+  }
+
+  header .english-name {
+    font-size: 9px;
+    letter-spacing: .7px;
+  }
+
+  main {
+    margin-top: 12px;
+    padding: 0 8px 25px;
+  }
+
+  .calendar {
+    padding: 5px;
+  }
+
+  .weekdays,
+  .days {
+    gap: 2px;
+  }
+
+  .day {
+    min-height: 65px;
+    border-radius: 5px;
+  }
+
+  .daynum {
+    font-size: 12px;
+  }
+
+  .event-chip {
+    padding: 2px;
+    font-size: 9px;
+  }
+
+  .toolbar {
+    padding: 10px;
+  }
+
+  .controls {
+    gap: 5px;
+  }
+
+  button,
+  input {
+    padding: 8px;
+    font-size: 13px;
+  }
+}
+
+@media(max-width: 360px) {
+  header {
+    gap: 9px;
+  }
+
+  .logo-frame {
+    width: 58px;
+    height: 58px;
+    flex-basis: 58px;
+  }
+
+  header h1 {
+    font-size: 18px;
+  }
+
+  header .english-name {
+    font-size: 8px;
+  }
+}
+
+
+/* ===== Warm, calm calendar redesign ===== */
+
+:root {
+  --green: #356b5b;
+  --light-green: #e8f0e8;
+  --ink: #263d36;
+  --muted: #77847c;
+  --line: #e7e4da;
+  --bg: #f7f5ee;
+  --gold: #c5a16b;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+
+  font-family:
     "Noto Sans SC",
     "Microsoft YaHei",
     system-ui,
     sans-serif;
+
   letter-spacing: .01em;
 }
 
-
-/* =========================================================
-   Header
-   ========================================================= */
-
 header {
   min-height: 390px;
+
   position: relative;
   isolation: isolate;
 
@@ -77,9 +597,11 @@ header {
 
 header::before {
   content: "";
+
   position: absolute;
   z-index: -1;
   inset: auto 0 0;
+
   height: 46px;
 
   background:
@@ -92,9 +614,11 @@ header::before {
 
 header::after {
   content: "";
+
   position: absolute;
   z-index: -1;
   inset: auto 0 0;
+
   height: 3px;
   background: rgba(177,158,119,.5);
 }
@@ -123,7 +647,6 @@ header::after {
 }
 
 .site-logo {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -144,7 +667,9 @@ header h1 {
     "SimSun",
     serif;
 
-  font-size: clamp(28px, 3.5vw, 43px);
+  font-size:
+    clamp(28px, 3.5vw, 43px);
+
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: .06em;
@@ -152,6 +677,7 @@ header h1 {
 
 header p {
   margin: 8px 0 0;
+
   color: #567064;
   font-size: 14px;
   line-height: 1.8;
@@ -165,6 +691,7 @@ header .english-name {
 
 header .motto {
   margin-top: 7px;
+
   font-size: 13px;
   letter-spacing: .28em;
   color: #9a8158;
@@ -172,13 +699,16 @@ header .motto {
 
 .hero-caption {
   max-width: 650px;
+
   margin-top: 54px;
   padding-left: 4px;
+
   color: #2c5d4d;
 }
 
 .hero-kicker {
   margin-bottom: 10px;
+
   color: #718a78;
   font-size: 14px;
   letter-spacing: .18em;
@@ -194,7 +724,9 @@ header .motto {
     "SimSun",
     serif;
 
-  font-size: clamp(34px, 5vw, 58px);
+  font-size:
+    clamp(34px, 5vw, 58px);
+
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: .05em;
@@ -206,24 +738,16 @@ header .motto {
   font-size: 15px;
 }
 
-
-/* =========================================================
-   Main layout
-   ========================================================= */
-
 main {
   max-width: 1500px;
+
   margin: -8px auto 0;
   padding: 0 24px 48px;
+
   position: relative;
 }
 
 .toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-
   gap: 14px;
   margin-bottom: 18px;
   padding: 15px 18px;
@@ -239,33 +763,20 @@ main {
     0 8px 28px rgba(48,58,54,.045);
 }
 
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-
 button,
 input {
-  font: inherit;
-  color: var(--ink);
-  background: #fffefa;
-
-  border:
-    1px solid #dedfd5;
-
-  border-radius: 11px;
   padding: 10px 14px;
+
+  background: #fffefa;
+  color: var(--ink);
+
+  border-color: #dedfd5;
+  border-radius: 11px;
 
   transition:
     border-color .18s ease,
     background .18s ease,
     transform .18s ease;
-}
-
-button {
-  cursor: pointer;
 }
 
 button:hover {
@@ -286,22 +797,12 @@ button.primary:hover {
   background: #2d5b4d;
 }
 
-button:disabled {
-  opacity: .6;
-  cursor: wait;
-}
-
 #monthLabel {
-  min-width: 135px;
   color: #3c594c;
   font-size: 19px;
-  font-weight: 700;
-  text-align: center;
 }
 
 .layout {
-  display: grid;
-
   grid-template-columns:
     minmax(0, 1.55fr)
     minmax(320px, 1fr);
@@ -310,9 +811,6 @@ button:disabled {
 }
 
 .panel {
-  min-width: 0;
-  overflow: hidden;
-
   background: rgba(255,254,250,.97);
 
   border:
@@ -325,21 +823,12 @@ button:disabled {
 }
 
 .panel-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 10px;
   padding: 17px 20px;
-
   background: #fbfaf6;
-
-  border-bottom:
-    1px solid #ebe8de;
+  border-bottom-color: #ebe8de;
 }
 
 .panel-head h2 {
-  margin: 0;
   color: #355d4d;
   font-size: 17px;
   letter-spacing: .04em;
@@ -347,54 +836,36 @@ button:disabled {
 
 .status {
   color: #858b83;
-  font-size: 12px;
 }
-
-
-/* =========================================================
-   Calendar
-   ========================================================= */
 
 .calendar {
   padding: 14px;
 }
 
-.weekdays,
-.days {
-  display: grid;
-
-  grid-template-columns:
-    repeat(7, minmax(0, 1fr));
-
-  gap: 6px;
-}
-
 .weekdays div {
   padding: 9px 0 11px;
+
   color: #81877e;
   font-size: 12px;
   letter-spacing: .08em;
-  text-align: center;
 }
 
 .weekdays div:first-child {
   color: #b27d70;
 }
 
+.days {
+  gap: 6px;
+}
+
 .day {
-  min-width: 0;
   min-height: 104px;
   padding: 8px;
-  overflow: hidden;
 
   background: #fffefa;
 
-  border:
-    1px solid #eeece4;
-
+  border-color: #eeece4;
   border-radius: 11px;
-
-  cursor: pointer;
 
   transition:
     border-color .16s ease,
@@ -429,78 +900,84 @@ button:disabled {
   margin-bottom: 7px;
   color: #4c574f;
   font-size: 13px;
-  font-weight: 700;
 }
 
 .event-chip {
-  display: block;
-
   margin: 4px 0;
   padding: 4px 5px;
 
-  color: #456452;
   background: #e9f0e9;
+  color: #456452;
 
-  border-left:
-    3px solid #8ca692;
-
+  border-left-color: #8ca692;
   border-radius: 5px;
 
   font-size: 11px;
-  line-height: 1.3;
-  overflow-wrap: anywhere;
 }
 
 .event-chip.more {
-  color: #817660;
   background: #f3f0e8;
+  color: #817660;
   border-left-color: #c8b58f;
 }
 
-.event-chip.school-holiday {
-  color: #285b91;
-  background: #e7f0fb;
-  border-left-color: #5b91c8;
-}
-
-.pill {
-  display: inline-block;
-
-  margin-left: 3px;
-  padding: 2px 6px;
-
-  color: #86591c;
-  background: #f4eadb;
-
-  border-radius: 20px;
-
-  font-size: 10px;
-}
-
-
-/* =========================================================
-   Event detail list
-   ========================================================= */
-
 .side-content {
-  padding: 14px;
-}
-
-.event-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  padding: 17px;
 }
 
 .event {
-  padding: 11px 13px;
+  padding: 14px;
 
   background: #fffefa;
 
-  border:
-    1px solid #e8e5dc;
-
+  border-color: #e8e5dc;
   border-radius: 12px;
+}
+
+.event h3 {
+  color: #3f5c4d;
+  line-height: 1.5;
+}
+
+.event p {
+  line-height: 1.65;
+}
+
+.event .date {
+  color: #64806d;
+}
+
+.empty {
+  color: #8a8e86;
+}
+
+.footnote {
+  padding: 12px 13px;
+
+  background: #f7f5ef;
+
+  border-radius: 10px;
+  line-height: 1.8;
+}
+
+footer {
+  max-width: none;
+
+  padding: 22px 16px 30px;
+
+  background: #e9e8df;
+  color: #7b8078;
+
+  line-height: 1.8;
+}
+
+
+/* ===== Special styling: school holidays ===== */
+
+.event-chip.school-holiday {
+  background: #e7f0fb;
+  color: #285b91;
+  border-left-color: #5b91c8;
 }
 
 .event.school-holiday {
@@ -508,41 +985,16 @@ button:disabled {
   border-color: #c9dcef;
 }
 
-.event .date {
-  margin: 0 0 2px;
-  color: #64806d;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.3;
+.event.school-holiday h3 {
+  color: #285b91;
 }
 
 .event.school-holiday .date {
   color: #4d7eae;
 }
 
-.event h3 {
-  margin: 2px 0 4px;
-  color: #3f5c4d;
-  font-size: 15px;
-  line-height: 1.35;
-}
 
-.event.school-holiday h3 {
-  color: #285b91;
-}
-
-.event p {
-  margin: 2px 0;
-  color: #586270;
-  font-size: 13px;
-  line-height: 1.4;
-
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-
-/* Time shown only in detail */
+/* ===== Time shown only in activity details ===== */
 
 .event .event-time {
   display: block;
@@ -550,8 +1002,8 @@ button:disabled {
   margin: 4px 0 3px;
   padding: 5px 8px;
 
-  color: #355f50;
   background: #edf4ef;
+  color: #355f50;
 
   border-radius: 6px;
 
@@ -565,75 +1017,24 @@ button:disabled {
 
 .event-time-icon {
   display: inline;
+
   margin-right: 3px;
+
   font-size: 13px;
   line-height: inherit;
   vertical-align: baseline;
 }
 
 
-/* =========================================================
-   Messages and footer
-   ========================================================= */
-
-.empty {
-  padding: 25px 10px;
-  color: var(--muted);
-  text-align: center;
-}
-
-.error {
-  display: none;
-
-  margin: 12px 0;
-  padding: 12px 14px;
-
-  color: #9f2d25;
-  background: #fff1f0;
-
-  border:
-    1px solid #ffd2ce;
-
-  border-radius: 10px;
-
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.footnote {
-  margin-top: 10px;
-  padding: 10px 11px;
-
-  color: var(--muted);
-  background: #f7f5ef;
-
-  border-radius: 10px;
-
-  font-size: 12px;
-  line-height: 1.6;
-}
-
-footer {
-  max-width: none;
-  padding: 22px 16px 30px;
-
-  color: #7b8078;
-  background: #e9e8df;
-
-  font-size: 12px;
-  line-height: 1.8;
-  text-align: center;
-}
-
-
-/* =========================================================
-   Tablet
-   ========================================================= */
+/* ===== Responsive final overrides ===== */
 
 @media(max-width: 850px) {
   header {
     min-height: 330px;
-    padding: 25px 22px 36px;
+
+    padding:
+      25px 22px 36px;
+
     background-position: 58% center;
   }
 
@@ -649,11 +1050,6 @@ footer {
     min-height: 84px;
   }
 }
-
-
-/* =========================================================
-   Mobile
-   ========================================================= */
 
 @media(max-width: 520px) {
   header {
@@ -730,23 +1126,8 @@ footer {
     border-radius: 14px;
   }
 
-  button,
-  input {
-    padding: 8px;
-    font-size: 13px;
-  }
-
-  #monthLabel {
-    min-width: 110px;
-  }
-
   .calendar {
     padding: 6px;
-  }
-
-  .weekdays,
-  .days {
-    gap: 3px;
   }
 
   .day {
@@ -754,16 +1135,16 @@ footer {
     padding: 4px;
   }
 
-  .daynum {
-    font-size: 12px;
-  }
-
   .event-chip {
-    padding: 2px;
     font-size: 9px;
   }
 
-  /* Compact mobile event details */
+  .weekdays,
+  .days {
+    gap: 3px;
+  }
+
+  /* Compact activity details on mobile */
 
   .side-content {
     padding: 9px;
@@ -803,6 +1184,7 @@ footer {
     line-height: 1.3;
 
     white-space: normal;
+    overflow-wrap: anywhere;
   }
 
   .event-time-icon {
@@ -814,26 +1196,6 @@ footer {
     margin-top: 9px;
     padding: 9px 10px;
     line-height: 1.5;
-  }
-}
-
-@media(max-width: 360px) {
-  header {
-    gap: 9px;
-  }
-
-  .logo-frame {
-    width: 58px;
-    height: 58px;
-    flex-basis: 58px;
-  }
-
-  header h1 {
-    font-size: 18px;
-  }
-
-  header .english-name {
-    font-size: 8px;
   }
 }
 </style>
@@ -990,9 +1352,7 @@ footer {
 "use strict";
 
 
-/* =========================================================
-   Google Sheets CSV links
-   ========================================================= */
+/* Google Sheets CSV links */
 
 const ACTIVITY_CSV_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vTcmNKJ322HzGxtlRqsQNQ-1DLRq-LXcivKuWEt7DWfXnf_EpofCpUkzbL9FUvK_WSxH0RaHbsCs5mY/pub?gid=1830432104&single=true&output=csv";
@@ -1030,10 +1390,6 @@ const norm = value =>
     );
 
 
-/* =========================================================
-   HTML escape
-   ========================================================= */
-
 function escapeHTML(value) {
   return String(value ?? "")
     .replace(/[&<>"']/g, character => ({
@@ -1046,9 +1402,7 @@ function escapeHTML(value) {
 }
 
 
-/* =========================================================
-   CSV parser
-   ========================================================= */
+/* CSV parser */
 
 function parseCSV(text) {
   const rows = [];
@@ -1151,9 +1505,7 @@ function parseCSV(text) {
 }
 
 
-/* =========================================================
-   Date functions
-   ========================================================= */
+/* Date functions */
 
 function validDate(
   year,
@@ -1177,6 +1529,8 @@ function validDate(
 }
 
 
+/* Original date parser retained */
+
 function parseDate(value) {
   const s =
     clean(value);
@@ -1190,7 +1544,7 @@ function parseDate(value) {
   /* yyyy-mm-dd, yyyy/mm/dd or yyyy.mm.dd */
 
   m = s.match(
-    /^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})(?:$|T|\s)/
+    /^(\d{4})\d{1,2}\d{1,2}(?:$|T|\s)/
   );
 
   if (m) {
@@ -1204,7 +1558,7 @@ function parseDate(value) {
   /* dd/mm/yyyy, dd-mm-yyyy or dd.mm.yyyy */
 
   m = s.match(
-    /^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/
+    /^(\d{1,2})\d{1,2}\d{4}$/
   );
 
   if (m) {
@@ -1256,7 +1610,7 @@ function parseDate(value) {
   /* 13-Feb-27 or 13 Feb 2027 */
 
   m = s.match(
-    /^(\d{1,2})[\s\-\/]([A-Za-z]{3,9})[\s,\-\/]+(\d{2,4})$/
+    /^(\d{1,2})[A-Za-z]{3,9}[\s,\-\/]+(\d{2,4})$/
   );
 
   if (
@@ -1397,9 +1751,7 @@ function addDays(
 }
 
 
-/* =========================================================
-   Time formatting
-   ========================================================= */
+/* Time formatting for activity details */
 
 function formatTime(value) {
   const text =
@@ -1411,8 +1763,7 @@ function formatTime(value) {
 
   /*
     Excel or Google Sheets decimal time.
-    Example:
-    0.354166667 = 8:30 AM
+    Example: 0.354166667 = 8:30 AM
   */
 
   if (
@@ -1475,7 +1826,7 @@ function formatTime(value) {
 
   const match =
     text.match(
-      /^(\d{1,2})[:.](\d{2})(?::\d{2})?\s*(am|pm)?$/i
+      /^(\d{1,2})\d{2}(?::\d{2})?\s*(am|pm)?$/i
     );
 
   if (!match) {
@@ -1581,9 +1932,7 @@ function activityTime(activity) {
 }
 
 
-/* =========================================================
-   Convert rows to objects
-   ========================================================= */
+/* Locate likely header row */
 
 function rowsToObjects(rows) {
   if (!rows.length) {
@@ -1682,9 +2031,7 @@ function getValue(
 }
 
 
-/* =========================================================
-   Detect activities
-   ========================================================= */
+/* Detect activities */
 
 function detectActivities(rows) {
   const objects =
@@ -1700,7 +2047,7 @@ function detectActivities(rows) {
           getValue(
             object,
             [
-        ntname|activityname)$/,
+              /^(activity|event|活动名称|活动|title|name|eventname|activityname)$/,
               /activityname/,
               /eventname/,
               /活动名称/
@@ -1729,6 +2076,8 @@ function detectActivities(rows) {
             ]
           );
 
+        /* New: Start time */
+
         const startTime =
           getValue(
             object,
@@ -1738,6 +2087,8 @@ function detectActivities(rows) {
               /开始时间/
             ]
           );
+
+        /* New: End time */
 
         const endTime =
           getValue(
@@ -1909,9 +2260,7 @@ function detectActivities(rows) {
 }
 
 
-/* =========================================================
-   Expand recurring activities
-   ========================================================= */
+/* Original recurrence expansion retained */
 
 function expandActivities(items) {
   const expanded = [];
@@ -2080,9 +2429,7 @@ function expandActivities(items) {
 }
 
 
-/* =========================================================
-   Date information
-   ========================================================= */
+/* Date information */
 
 function parseDateInfo(rows) {
   return rowsToObjects(rows)
@@ -2146,9 +2493,7 @@ function parseDateInfo(rows) {
 }
 
 
-/* =========================================================
-   Fetch CSV
-   ========================================================= */
+/* Fetch CSV */
 
 async function fetchCSV(url) {
   const response =
@@ -2193,9 +2538,7 @@ async function fetchCSV(url) {
 }
 
 
-/* =========================================================
-   Load data
-   ========================================================= */
+/* Load data */
 
 async function loadData() {
   $("refreshBtn").disabled =
@@ -2292,9 +2635,7 @@ async function loadData() {
 }
 
 
-/* =========================================================
-   Filtering and sorting
-   ========================================================= */
+/* Filtering and sorting */
 
 function infoFor(key) {
   return dateInfo.find(
@@ -2397,9 +2738,7 @@ function activityOn(key) {
 }
 
 
-/* =========================================================
-   Render calendar
-   ========================================================= */
+/* Render calendar */
 
 function renderCalendar() {
   const year =
@@ -2600,9 +2939,7 @@ function renderCalendar() {
 }
 
 
-/* =========================================================
-   Event detail card
-   ========================================================= */
+/* Event detail card */
 
 function eventCard(activity) {
   const date =
@@ -2705,9 +3042,7 @@ function eventCard(activity) {
 }
 
 
-/* =========================================================
-   Render event list
-   ========================================================= */
+/* Render event list */
 
 function renderList() {
   const all =
@@ -2814,19 +3149,13 @@ function renderList() {
 }
 
 
-/* =========================================================
-   Main render
-   ========================================================= */
-
 function render() {
   renderCalendar();
   renderList();
 }
 
 
-/* =========================================================
-   Buttons and search
-   ========================================================= */
+/* Buttons and search */
 
 $("prevBtn")
   .addEventListener(
@@ -2907,9 +3236,7 @@ $("searchInput")
   );
 
 
-/* =========================================================
-   Initial load and auto refresh
-   ========================================================= */
+/* Initial load and auto refresh */
 
 render();
 
