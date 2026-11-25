@@ -27,20 +27,16 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-
   font-family:
     "Noto Sans SC",
     "Microsoft YaHei",
     system-ui,
     sans-serif;
-
   letter-spacing: .01em;
 }
 
 
-/* =========================================================
-   Header
-   ========================================================= */
+/* ===== Header ===== */
 
 header {
   min-height: 390px;
@@ -52,13 +48,10 @@ header {
   align-items: stretch;
   justify-content: flex-start;
 
-  gap: 0;
-
   padding:
     28px clamp(20px, 6vw, 88px) 42px;
 
   color: var(--green);
-  text-align: left;
   overflow: hidden;
 
   background:
@@ -82,7 +75,6 @@ header::before {
   position: absolute;
   z-index: -1;
   inset: auto 0 0;
-
   height: 46px;
 
   background:
@@ -98,7 +90,6 @@ header::after {
   position: absolute;
   z-index: -1;
   inset: auto 0 0;
-
   height: 3px;
   background: rgba(177,158,119,.5);
 }
@@ -114,13 +105,10 @@ header::after {
   width: 104px;
   height: 104px;
   flex: 0 0 104px;
-
   padding: 5px;
 
   border-radius: 50%;
-
-  background:
-    rgba(255,255,250,.88);
+  background: rgba(255,255,250,.88);
 
   box-shadow:
     0 5px 22px rgba(52,75,62,.10);
@@ -130,21 +118,17 @@ header::after {
 
 .site-logo {
   display: block;
-
   width: 100%;
   height: 100%;
-
   object-fit: contain;
 }
 
 .header-text {
   min-width: 0;
-  text-shadow: none;
 }
 
 header h1 {
   margin: 0;
-
   color: #285849;
 
   font-family:
@@ -153,9 +137,7 @@ header h1 {
     "SimSun",
     serif;
 
-  font-size:
-    clamp(28px, 3.5vw, 43px);
-
+  font-size: clamp(28px, 3.5vw, 43px);
   font-weight: 700;
   line-height: 1.3;
   letter-spacing: .06em;
@@ -163,9 +145,7 @@ header h1 {
 
 header p {
   margin: 8px 0 0;
-
   color: #567064;
-
   font-size: 14px;
   line-height: 1.8;
 }
@@ -178,33 +158,26 @@ header .english-name {
 
 header .motto {
   margin-top: 7px;
-
+  color: #9a8158;
   font-size: 13px;
   letter-spacing: .28em;
-  color: #9a8158;
 }
 
 .hero-caption {
   max-width: 650px;
-
   margin-top: 54px;
   padding-left: 4px;
-
-  color: #2c5d4d;
 }
 
 .hero-kicker {
   margin-bottom: 10px;
-
   color: #718a78;
-
   font-size: 14px;
   letter-spacing: .18em;
 }
 
 .hero-caption h2 {
   margin: 0;
-
   color: #285849;
 
   font-family:
@@ -213,55 +186,41 @@ header .motto {
     "SimSun",
     serif;
 
-  font-size:
-    clamp(34px, 5vw, 58px);
-
-  font-weight: 700;
+  font-size: clamp(34px, 5vw, 58px);
   line-height: 1.2;
   letter-spacing: .05em;
 }
 
 .hero-caption p {
   margin-top: 15px;
-
   color: #5f7769;
-
   font-size: 15px;
 }
 
 
-/* =========================================================
-   Main
-   ========================================================= */
+/* ===== Main ===== */
 
 main {
   max-width: 1500px;
-
   margin: -8px auto 0;
   padding: 0 24px 48px;
-
   position: relative;
 }
 
 
-/* =========================================================
-   Toolbar
-   ========================================================= */
+/* ===== Toolbar ===== */
 
 .toolbar {
   display: flex;
   flex-wrap: wrap;
-
   align-items: center;
   justify-content: space-between;
 
   gap: 14px;
-
   margin-bottom: 12px;
   padding: 15px 18px;
 
-  background:
-    rgba(255,254,250,.96);
+  background: rgba(255,254,250,.96);
 
   border:
     1px solid rgba(226,222,210,.95);
@@ -276,13 +235,11 @@ main {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-
   gap: 8px;
 }
 
 button {
   font: inherit;
-
   padding: 10px 14px;
 
   color: var(--ink);
@@ -292,7 +249,6 @@ button {
     1px solid #dedfd5;
 
   border-radius: 11px;
-
   cursor: pointer;
 
   transition:
@@ -311,9 +267,9 @@ button:active {
 }
 
 button.primary {
+  color: #fffdf7;
   background: var(--green);
   border-color: var(--green);
-  color: #fffdf7;
 }
 
 button.primary:hover {
@@ -327,25 +283,20 @@ button:disabled {
 
 #monthLabel {
   min-width: 135px;
-
   color: #3c594c;
-
   font-size: 19px;
   font-weight: 700;
   text-align: center;
 }
 
 
-/* =========================================================
-   Activity Filters
-   ========================================================= */
+/* ===== Activity filters ===== */
 
 .filter-panel {
   margin-bottom: 18px;
   padding: 13px 16px;
 
-  background:
-    rgba(255,254,250,.96);
+  background: rgba(255,254,250,.96);
 
   border:
     1px solid rgba(226,222,210,.95);
@@ -367,7 +318,6 @@ button:disabled {
 
 .filter-label {
   color: #40594d;
-
   font-size: 13px;
   font-weight: 700;
 }
@@ -429,9 +379,7 @@ button:disabled {
 }
 
 
-/* =========================================================
-   Panels
-   ========================================================= */
+/* ===== Panels ===== */
 
 .layout {
   display: grid;
@@ -447,8 +395,7 @@ button:disabled {
   min-width: 0;
   overflow: hidden;
 
-  background:
-    rgba(255,254,250,.97);
+  background: rgba(255,254,250,.97);
 
   border:
     1px solid #e6e2d8;
@@ -461,12 +408,10 @@ button:disabled {
 
 .panel-head {
   display: flex;
-
   align-items: center;
   justify-content: space-between;
 
   gap: 10px;
-
   padding: 17px 20px;
 
   background: #fbfaf6;
@@ -477,9 +422,7 @@ button:disabled {
 
 .panel-head h2 {
   margin: 0;
-
   color: #355d4d;
-
   font-size: 17px;
   letter-spacing: .04em;
 }
@@ -490,9 +433,7 @@ button:disabled {
 }
 
 
-/* =========================================================
-   Calendar
-   ========================================================= */
+/* ===== Calendar ===== */
 
 .calendar {
   padding: 14px;
@@ -510,9 +451,7 @@ button:disabled {
 
 .weekdays div {
   padding: 9px 0 11px;
-
   color: #81877e;
-
   font-size: 12px;
   letter-spacing: .08em;
   text-align: center;
@@ -535,7 +474,6 @@ button:disabled {
     1px solid #eeece4;
 
   border-radius: 11px;
-
   cursor: pointer;
 
   transition:
@@ -569,17 +507,13 @@ button:disabled {
 
 .daynum {
   margin-bottom: 5px;
-
   color: #4c574f;
-
   font-size: 13px;
   font-weight: 700;
 }
 
 
-/* =========================================================
-   Lunar / Holiday badges
-   ========================================================= */
+/* ===== Lunar and holiday badges ===== */
 
 .date-info-badges {
   display: flex;
@@ -587,60 +521,44 @@ button:disabled {
   align-items: center;
 
   gap: 3px;
-
   margin: 0 0 5px;
 }
 
-.lunar-badge {
+.lunar-badge,
+.holiday-badge {
   display: inline-block;
-
   max-width: 100%;
 
   padding: 2px 6px;
 
+  border-radius: 999px;
+
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.25;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.lunar-badge {
   color: #a2554b;
   background: #f8e8e5;
 
   border:
     1px solid #efd0cb;
-
-  border-radius: 999px;
-
-  font-size: 9px;
-  font-weight: 600;
-  line-height: 1.25;
-
-  white-space: normal;
-  overflow-wrap: anywhere;
 }
 
 .holiday-badge {
-  display: inline-block;
-
-  max-width: 100%;
-
-  padding: 2px 6px;
-
   color: #86591c;
   background: #f4eadb;
 
   border:
     1px solid #e8d4b5;
-
-  border-radius: 999px;
-
-  font-size: 9px;
-  font-weight: 600;
-  line-height: 1.25;
-
-  white-space: normal;
-  overflow-wrap: anywhere;
 }
 
 
-/* =========================================================
-   Event chips
-   ========================================================= */
+/* ===== Event chips ===== */
 
 .event-chip {
   display: block;
@@ -674,9 +592,7 @@ button:disabled {
 }
 
 
-/* =========================================================
-   Event Detail
-   ========================================================= */
+/* ===== Event details ===== */
 
 .side-content {
   padding: 14px;
@@ -706,9 +622,7 @@ button:disabled {
 
 .event .date {
   margin: 0 0 2px;
-
   color: #64806d;
-
   font-size: 12px;
   font-weight: 700;
   line-height: 1.3;
@@ -720,9 +634,7 @@ button:disabled {
 
 .event h3 {
   margin: 2px 0 4px;
-
   color: #3f5c4d;
-
   font-size: 15px;
   line-height: 1.35;
 }
@@ -733,9 +645,7 @@ button:disabled {
 
 .event p {
   margin: 2px 0;
-
   color: #586270;
-
   font-size: 13px;
   line-height: 1.4;
 
@@ -764,24 +674,18 @@ button:disabled {
 
 .event-time-icon {
   display: inline;
-
   margin-right: 3px;
-
   font-size: 13px;
   line-height: inherit;
   vertical-align: baseline;
 }
 
 
-/* =========================================================
-   Misc
-   ========================================================= */
+/* ===== Other ===== */
 
 .empty {
   padding: 25px 10px;
-
   color: var(--muted);
-
   text-align: center;
 }
 
@@ -817,8 +721,6 @@ button:disabled {
 }
 
 footer {
-  max-width: none;
-
   padding: 22px 16px 30px;
 
   color: #7b8078;
@@ -830,19 +732,13 @@ footer {
 }
 
 
-/* =========================================================
-   Tablet
-   ========================================================= */
+/* ===== Tablet ===== */
 
 @media(max-width: 850px) {
   header {
     min-height: 330px;
-
-    padding:
-      25px 22px 36px;
-
-    background-position:
-      58% center;
+    padding: 25px 22px 36px;
+    background-position: 58% center;
   }
 
   .hero-caption {
@@ -859,19 +755,13 @@ footer {
 }
 
 
-/* =========================================================
-   Mobile
-   ========================================================= */
+/* ===== Mobile ===== */
 
 @media(max-width: 520px) {
   header {
     min-height: 300px;
-
-    padding:
-      20px 14px 32px;
-
-    background-position:
-      61% center;
+    padding: 20px 14px 32px;
+    background-position: 61% center;
   }
 
   .brand-row {
@@ -1003,9 +893,7 @@ footer {
   .lunar-badge,
   .holiday-badge {
     padding: 1px 4px;
-
     border-radius: 5px;
-
     font-size: 8px;
     line-height: 1.2;
   }
@@ -1013,7 +901,6 @@ footer {
   .event-chip {
     margin: 2px 0;
     padding: 2px;
-
     font-size: 9px;
     line-height: 1.25;
   }
@@ -1032,21 +919,18 @@ footer {
 
   .event .date {
     margin: 0 0 1px;
-
     font-size: 11px;
     line-height: 1.25;
   }
 
   .event h3 {
     margin: 1px 0 3px;
-
     font-size: 14px;
     line-height: 1.3;
   }
 
   .event p {
     margin: 1px 0;
-
     font-size: 12px;
     line-height: 1.3;
   }
@@ -1054,48 +938,18 @@ footer {
   .event .event-time {
     margin: 3px 0 2px;
     padding: 4px 7px;
-
     font-size: 12px;
     line-height: 1.3;
-  }
-
-  .event-time-icon {
-    margin-right: 2px;
-    font-size: 12px;
   }
 
   .footnote {
     margin-top: 9px;
     padding: 9px 10px;
-
     line-height: 1.5;
   }
 }
 
-
-/* =========================================================
-   Very narrow mobile
-   ========================================================= */
-
 @media(max-width: 360px) {
-  header {
-    gap: 9px;
-  }
-
-  .logo-frame {
-    width: 58px;
-    height: 58px;
-    flex-basis: 58px;
-  }
-
-  header h1 {
-    font-size: 18px;
-  }
-
-  header .english-name {
-    font-size: 8px;
-  }
-
   .date-info-badges {
     display: block;
   }
@@ -1103,13 +957,9 @@ footer {
   .lunar-badge,
   .holiday-badge {
     display: block;
-
     width: fit-content;
-    max-width: 100%;
-
     margin-bottom: 2px;
     padding: 1px 3px;
-
     font-size: 7px;
   }
 }
@@ -1126,7 +976,6 @@ footer {
         src="./logo.png"
         alt="美里佛教居士林标志"
         class="site-logo"
-        id="siteLogo"
       >
     </div>
 
@@ -1181,10 +1030,7 @@ footer {
   </div>
 
 
-  <div
-    id="categoryPanel"
-    class="filter-panel"
-  >
+  <div class="filter-panel">
     <div class="filter-heading">
       <span class="filter-label">
         活动类型
@@ -1290,9 +1136,7 @@ footer {
 "use strict";
 
 
-/* =========================================================
-   Google Sheets CSV links
-   ========================================================= */
+/* ===== Google Sheets CSV ===== */
 
 const ACTIVITY_CSV_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vTcmNKJ322HzGxtlRqsQNQ-1DLRq-LXcivKuWEt7DWfXnf_EpofCpUkzbL9FUvK_WSxH0RaHbsCs5mY/pub?gid=1830432104&single=true&output=csv";
@@ -1350,9 +1194,7 @@ function escapeHTML(value) {
 }
 
 
-/* =========================================================
-   CSV parser
-   ========================================================= */
+/* ===== CSV parser ===== */
 
 function parseCSV(text) {
   const rows = [];
@@ -1455,9 +1297,7 @@ function parseCSV(text) {
 }
 
 
-/* =========================================================
-   Dates
-   ========================================================= */
+/* ===== Dates ===== */
 
 function validDate(
   year,
@@ -1492,7 +1332,12 @@ function parseDate(value) {
   let m;
 
 
-  /* yyyy-mm-dd / yyyy/mm/dd / yyyy.mm.dd */
+  /*
+    Correct formats:
+    2027-01-15
+    2027/01/15
+    2027.01.15
+  */
 
   m = s.match(
     /^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})(?:$|T|\s)/
@@ -1507,7 +1352,12 @@ function parseDate(value) {
   }
 
 
-  /* dd/mm/yyyy / dd-mm-yyyy / dd.mm.yyyy */
+  /*
+    Correct formats:
+    15/01/2027
+    15-01-2027
+    15.01.2027
+  */
 
   m = s.match(
     /^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/
@@ -1561,7 +1411,11 @@ function parseDate(value) {
   };
 
 
-  /* 13-Feb-27 / 13 Feb 2027 */
+  /*
+    Correct formats:
+    13-Feb-27
+    13 Feb 2027
+  */
 
   m = s.match(
     /^(\d{1,2})[\s\-\/]([A-Za-z]{3,9})[\s,\-\/]+(\d{2,4})$/
@@ -1647,6 +1501,7 @@ function parseDate(value) {
   const parsed =
     new Date(s);
 
+
   if (
     !Number.isNaN(
       parsed.getTime()
@@ -1658,6 +1513,7 @@ function parseDate(value) {
       parsed.getDate()
     );
   }
+
 
   return null;
 }
@@ -1682,12 +1538,15 @@ function fromKey(key) {
       /^(\d{4})-(\d{2})-(\d{2})$/
     );
 
+
   return match
+
     ? new Date(
         Number(match[1]),
         Number(match[2]) - 1,
         Number(match[3])
       )
+
     : null;
 }
 
@@ -1708,9 +1567,7 @@ function addDays(
 }
 
 
-/* =========================================================
-   Time formatting
-   ========================================================= */
+/* ===== Times ===== */
 
 function formatTime(value) {
   const text =
@@ -1720,6 +1577,8 @@ function formatTime(value) {
     return "";
   }
 
+
+  /* Excel decimal time */
 
   if (
     /^(?:0?\.\d+|1(?:\.0+)?)$/
@@ -1771,10 +1630,19 @@ function formatTime(value) {
   }
 
 
+  /*
+    Correct formats:
+    08:30
+    08:30:00
+    8.30 am
+    7.30 pm
+  */
+
   const match =
     text.match(
       /^(\d{1,2})[:.](\d{2})(?::\d{2})?\s*(am|pm)?$/i
     );
+
 
   if (!match) {
     return text;
@@ -1888,17 +1756,17 @@ function activityTime(activity) {
 }
 
 
-/* =========================================================
-   Convert CSV rows
-   ========================================================= */
+/* ===== Rows and headers ===== */
 
 function rowsToObjects(rows) {
   if (!rows.length) {
     return [];
   }
 
+
   let headerRow = 0;
   let bestScore = -1;
+
 
   for (
     let i = 0;
@@ -1911,12 +1779,14 @@ function rowsToObjects(rows) {
     const cells =
       rows[i].map(norm);
 
+
     const score =
       cells.filter(
         cell =>
           /activity|event|活动|title|名称|startdate|开始日期|date|日期/
             .test(cell)
       ).length;
+
 
     if (
       score > bestScore
@@ -1926,14 +1796,17 @@ function rowsToObjects(rows) {
     }
   }
 
+
   const headers =
     rows[headerRow]
       .map(clean);
+
 
   return rows
     .slice(
       headerRow + 1
     )
+
     .filter(
       row =>
         row.some(
@@ -1941,9 +1814,11 @@ function rowsToObjects(rows) {
             clean(value) !== ""
         )
     )
+
     .map(
       row => {
         const object = {};
+
 
         headers.forEach(
           (
@@ -1958,6 +1833,7 @@ function rowsToObjects(rows) {
             }
           }
         );
+
 
         return object;
       }
@@ -1980,8 +1856,10 @@ function getValue(
               norm(key)
             )
         ) &&
+
         clean(value) !== ""
     );
+
 
   return entry
     ? clean(entry[1])
@@ -1989,13 +1867,12 @@ function getValue(
 }
 
 
-/* =========================================================
-   Detect activities
-   ========================================================= */
+/* ===== Activities ===== */
 
 function detectActivities(rows) {
   const objects =
     rowsToObjects(rows);
+
 
   return objects
     .map(
@@ -2143,9 +2020,7 @@ function detectActivities(rows) {
           );
 
 
-        const recurrence =
-          getValue(
-            object,
+             object,
             [
               /^(recurrence|repeat|重复|重复规则|频率)$/,
               /recurrence/,
@@ -2238,12 +2113,11 @@ function detectActivities(rows) {
 }
 
 
-/* =========================================================
-   Recurring activities
-   ========================================================= */
+/* ===== Recurrence ===== */
 
 function expandActivities(items) {
   const expanded = [];
+
 
   for (
     const activity of items
@@ -2263,6 +2137,7 @@ function expandActivities(items) {
 
     const isSingle =
       !rule ||
+
       /^(none|no|never|无|不重复|一次|one.?time|单次)$/i
         .test(rule);
 
@@ -2271,6 +2146,7 @@ function expandActivities(items) {
       for (
         let date =
           new Date(start),
+
         count = 0;
 
         date <= end &&
@@ -2281,6 +2157,7 @@ function expandActivities(items) {
             date,
             1
           ),
+
         count++
       ) {
         expanded.push({
@@ -2290,6 +2167,7 @@ function expandActivities(items) {
             dateKey(date)
         });
       }
+
 
       continue;
     }
@@ -2332,6 +2210,7 @@ function expandActivities(items) {
 
     const lastDate =
       activity.repeatUntil ||
+
       new Date(
         2027,
         11,
@@ -2356,6 +2235,7 @@ function expandActivities(items) {
     for (
       let date =
         new Date(start),
+
       count = 0;
 
       date <= stop &&
@@ -2366,6 +2246,7 @@ function expandActivities(items) {
           date,
           1
         ),
+
       count++
     ) {
       const daysFromStart =
@@ -2417,13 +2298,12 @@ function expandActivities(items) {
     }
   }
 
+
   return expanded;
 }
 
 
-/* =========================================================
-   Date information
-   ========================================================= */
+/* ===== Date information ===== */
 
 function parseDateInfo(rows) {
   return rowsToObjects(rows)
@@ -2492,9 +2372,7 @@ function parseDateInfo(rows) {
 }
 
 
-/* =========================================================
-   Fetch CSV
-   ========================================================= */
+/* ===== Fetch ===== */
 
 async function fetchCSV(url) {
   const response =
@@ -2546,9 +2424,7 @@ async function fetchCSV(url) {
 }
 
 
-/* =========================================================
-   Activity Filters
-   ========================================================= */
+/* ===== Filters ===== */
 
 function isFriendActivity(activity) {
   const title =
@@ -2607,11 +2483,6 @@ function matchesFilter(activity) {
     );
   }
 
-
-  /*
-    Default:
-    everything except 佛青之友
-  */
 
   return !isFriendActivity(
     activity
@@ -2876,9 +2747,7 @@ function renderCategoryFilters() {
 }
 
 
-/* =========================================================
-   Load Data
-   ========================================================= */
+/* ===== Load ===== */
 
 async function loadData() {
   $("refreshBtn").disabled =
@@ -2907,15 +2776,6 @@ async function loadData() {
 
 
     if (!parsed.length) {
-      console.error(
-        "活动 CSV 前 20 行：",
-        activityRows.slice(
-          0,
-          20
-        )
-      );
-
-
       throw new Error(
         "已连接 CSV，但无法识别活动日期或活动名称。请检查 Google Sheets 的实际表头。"
       );
@@ -2970,9 +2830,7 @@ async function loadData() {
 
     $("errorBox").textContent =
       "活动资料载入失败：\n" +
-      error.message +
-      "\n\n如果出现 Failed to fetch，可能是网络或跨站请求问题。" +
-      "如果提示无法识别活动，则需要根据实际 CSV 表头调整识别规则。";
+      error.message;
 
 
     $("errorBox").style.display =
@@ -2993,9 +2851,7 @@ async function loadData() {
 }
 
 
-/* =========================================================
-   Calendar helpers
-   ========================================================= */
+/* ===== Calendar helpers ===== */
 
 function infoFor(key) {
   return dateInfo.find(
@@ -3050,9 +2906,7 @@ function compareActivities(
   return (
     eventPriority(first) -
     eventPriority(second)
-  )
-
-  ||
+  ) ||
 
   first.title.localeCompare(
     second.title,
@@ -3088,9 +2942,7 @@ function activityOn(key) {
 }
 
 
-/* =========================================================
-   Render Calendar
-   ========================================================= */
+/* ===== Render calendar ===== */
 
 function renderCalendar() {
   const year =
@@ -3142,7 +2994,11 @@ function renderCalendar() {
 
 
     const key =
-   date.getMonth() ===
+      dateKey(date);
+
+
+    const inMonth =
+      date.getMonth() ===
       month;
 
 
@@ -3201,7 +3057,6 @@ function renderCalendar() {
 
             ${
               lunarText
-
                 ? `
                   <span
                     class="lunar-badge"
@@ -3210,13 +3065,11 @@ function renderCalendar() {
                     ${escapeHTML(lunarText)}
                   </span>
                 `
-
                 : ""
             }
 
             ${
               holidayText
-
                 ? `
                   <span
                     class="holiday-badge"
@@ -3225,7 +3078,6 @@ function renderCalendar() {
                     ${escapeHTML(holidayText)}
                   </span>
                 `
-
                 : ""
             }
 
@@ -3302,7 +3154,6 @@ function renderCalendar() {
 
 
   $("days")
-
     .querySelectorAll(
       ".day"
     )
@@ -3347,9 +3198,7 @@ function renderCalendar() {
 }
 
 
-/* =========================================================
-   Event Detail
-   ========================================================= */
+/* ===== Event details ===== */
 
 function eventCard(activity) {
   const date =
@@ -3408,7 +3257,6 @@ function eventCard(activity) {
 
       ${
         timeText
-
           ? `
             <p class="event-time">
               <span
@@ -3417,59 +3265,50 @@ function eventCard(activity) {
               >◷</span><strong>时间：</strong>${escapeHTML(timeText)}
             </p>
           `
-
           : ""
       }
 
 
       ${
         activity.category
-
           ? `
             <p>
               类别：${escapeHTML(activity.category)}
             </p>
           `
-
           : ""
       }
 
 
       ${
         activity.location
-
           ? `
             <p>
               地点：${escapeHTML(activity.location)}
             </p>
           `
-
           : ""
       }
 
 
       ${
         activity.owner
-
           ? `
             <p>
               负责人：${escapeHTML(activity.owner)}
             </p>
           `
-
           : ""
       }
 
 
       ${
         activity.description
-
           ? `
             <p>
               ${escapeHTML(activity.description)}
             </p>
           `
-
           : ""
       }
 
@@ -3478,9 +3317,7 @@ function eventCard(activity) {
 }
 
 
-/* =========================================================
-   Render Event List
-   ========================================================= */
+/* ===== Render event list ===== */
 
 function renderList() {
   const all =
@@ -3538,14 +3375,12 @@ function renderList() {
         `${viewDate.getFullYear()} 年 ${viewDate.getMonth() + 1} 月佛青之友活动`;
     }
 
-
     else if (
       filterMode === "all"
     ) {
       title =
         `${viewDate.getFullYear()} 年 ${viewDate.getMonth() + 1} 月全部活动`;
     }
-
 
     else {
       title =
@@ -3561,9 +3396,7 @@ function renderList() {
     ) =>
       first.date.localeCompare(
         second.date
-      )
-
-      ||
+      ) ||
 
       compareActivities(
         first,
@@ -3621,19 +3454,13 @@ function renderList() {
 }
 
 
-/* =========================================================
-   Render
-   ========================================================= */
-
 function render() {
   renderCalendar();
   renderList();
 }
 
 
-/* =========================================================
-   Navigation
-   ========================================================= */
+/* ===== Navigation ===== */
 
 $("prevBtn")
   .addEventListener(
@@ -3649,7 +3476,6 @@ $("prevBtn")
 
 
       selectedDate = "";
-
 
       render();
     }
@@ -3670,7 +3496,6 @@ $("nextBtn")
 
 
       selectedDate = "";
-
 
       render();
     }
@@ -3697,7 +3522,6 @@ $("todayBtn")
       selectedDate =
         dateKey(now);
 
-
       render();
     }
   );
@@ -3710,9 +3534,7 @@ $("refreshBtn")
   );
 
 
-/* =========================================================
-   Initial load
-   ========================================================= */
+/* ===== Start ===== */
 
 renderCategoryFilters();
 
@@ -3720,8 +3542,6 @@ render();
 
 loadData();
 
-
-/* Auto refresh every 5 minutes */
 
 setInterval(
   loadData,
