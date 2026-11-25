@@ -10,533 +10,6 @@
 
 <style>
 :root {
-  --green: #376b5b;
-  --light-green: #e7f1ec;
-  --ink: #273444;
-  --muted: #6b7280;
-  --line: #e5e7eb;
-  --bg: #f4f6f5;
-  --gold: #c58d45;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--ink);
-  font-family:
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    "Microsoft YaHei",
-    sans-serif;
-}
-
-
-/* ===== Header and Logo ===== */
-
-header {
-  background:
-    linear-gradient(
-      135deg,
-      #244f45,
-      #477a68
-    );
-
-  color: white;
-  padding: 24px 18px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 22px;
-  text-align: left;
-  overflow: visible;
-}
-
-.logo-frame {
-  width: 100px;
-  height: 100px;
-  flex: 0 0 100px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  overflow: visible;
-}
-
-.site-logo {
-  display: block;
-  width: 100%;
-  height: 100%;
-
-  object-fit: contain;
-  object-position: center center;
-
-  flex-shrink: 0;
-
-  border: none;
-  border-radius: 0;
-}
-
-.header-text {
-  min-width: 0;
-}
-
-header h1 {
-  margin: 0;
-
-  font-size:
-    clamp(24px, 4vw, 36px);
-
-  letter-spacing: .06em;
-  line-height: 1.35;
-}
-
-header p {
-  margin: 7px 0 0;
-  color: #e4eee9;
-  line-height: 1.5;
-}
-
-header .english-name {
-  font-size: 12px;
-  letter-spacing: 1.5px;
-  color: #e7d6b6;
-}
-
-
-/* ===== Main layout ===== */
-
-main {
-  max-width: 1200px;
-  margin: 22px auto;
-  padding: 0 16px 40px;
-}
-
-.toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-
-  align-items: center;
-  justify-content: space-between;
-
-  background: white;
-  padding: 14px;
-
-  border:
-    1px solid var(--line);
-
-  border-radius: 14px;
-  margin-bottom: 16px;
-}
-
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-}
-
-button,
-input {
-  font: inherit;
-
-  border:
-    1px solid #d1d5db;
-
-  border-radius: 9px;
-  padding: 9px 12px;
-
-  background: white;
-  color: var(--ink);
-}
-
-button {
-  cursor: pointer;
-}
-
-button.primary {
-  background: var(--green);
-  color: white;
-  border-color: var(--green);
-}
-
-button:hover {
-  border-color: #8bb4a4;
-}
-
-button:disabled {
-  opacity: .6;
-  cursor: wait;
-}
-
-#monthLabel {
-  min-width: 135px;
-
-  font-size: 20px;
-  font-weight: 700;
-  text-align: center;
-}
-
-.layout {
-  display: grid;
-
-  grid-template-columns:
-    minmax(0, 1.7fr)
-    minmax(280px, 1fr);
-
-  gap: 16px;
-}
-
-.panel {
-  background: white;
-
-  border:
-    1px solid var(--line);
-
-  border-radius: 14px;
-  overflow: hidden;
-  min-width: 0;
-}
-
-.panel-head {
-  padding: 15px 17px;
-
-  border-bottom:
-    1px solid var(--line);
-
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  align-items: center;
-}
-
-.panel-head h2 {
-  margin: 0;
-  font-size: 17px;
-}
-
-.status {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-
-/* ===== Calendar ===== */
-
-.calendar {
-  padding: 12px;
-}
-
-.weekdays,
-.days {
-  display: grid;
-
-  grid-template-columns:
-    repeat(7, minmax(0, 1fr));
-
-  gap: 5px;
-}
-
-.weekdays div {
-  padding: 8px 0;
-
-  text-align: center;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.day {
-  min-width: 0;
-  min-height: 100px;
-
-  padding: 6px;
-  overflow: hidden;
-
-  background: white;
-
-  border:
-    1px solid #edf0ef;
-
-  border-radius: 9px;
-  cursor: pointer;
-}
-
-.day:hover {
-  border-color: #8bb4a4;
-  background: #fbfdfc;
-}
-
-.day.outside {
-  background: #f8f9f8;
-  color: #a6adb4;
-}
-
-.day.today {
-  border:
-    2px solid var(--gold);
-}
-
-.day.selected {
-  background: var(--light-green);
-  border-color: var(--green);
-}
-
-.daynum {
-  margin-bottom: 5px;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.event-chip {
-  display: block;
-
-  margin: 3px 0;
-  padding: 3px 4px;
-
-  background: #e8f1ed;
-  color: #285c4c;
-
-  border-left:
-    3px solid #548b76;
-
-  border-radius: 4px;
-
-  font-size: 11px;
-  line-height: 1.3;
-  overflow-wrap: anywhere;
-}
-
-.event-chip.more {
-  background: #f3f4f6;
-  color: #59616b;
-  border-left-color: #9ca3af;
-}
-
-
-/* ===== Event list ===== */
-
-.side-content {
-  padding: 14px 16px;
-}
-
-.event-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.event {
-  padding: 11px;
-
-  border:
-    1px solid var(--line);
-
-  border-radius: 10px;
-}
-
-.event h3 {
-  margin: 5px 0;
-  font-size: 15px;
-}
-
-.event p {
-  margin: 4px 0;
-
-  color: #586270;
-  font-size: 13px;
-
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.event .date {
-  color: var(--green);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.empty {
-  padding: 25px 10px;
-  text-align: center;
-  color: var(--muted);
-}
-
-.error {
-  display: none;
-
-  margin: 12px 0;
-  padding: 12px 14px;
-
-  background: #fff1f0;
-  color: #9f2d25;
-
-  border:
-    1px solid #ffd2ce;
-
-  border-radius: 10px;
-
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.footnote {
-  margin-top: 14px;
-
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.pill {
-  display: inline-block;
-
-  margin-left: 3px;
-  padding: 2px 6px;
-
-  background: #f4eadb;
-  color: #86591c;
-
-  border-radius: 20px;
-  font-size: 10px;
-}
-
-footer {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 16px 28px;
-
-  text-align: center;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-
-/* ===== Base responsive layout ===== */
-
-@media(max-width: 850px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-
-  .day {
-    min-height: 80px;
-    padding: 4px;
-  }
-
-  .event-chip {
-    font-size: 10px;
-  }
-
-  .toolbar {
-    align-items: flex-start;
-  }
-
-  #monthLabel {
-    min-width: 110px;
-  }
-}
-
-@media(max-width: 520px) {
-  header {
-    gap: 12px;
-    padding: 18px 12px;
-  }
-
-  .logo-frame {
-    width: 70px;
-    height: 70px;
-    flex-basis: 70px;
-  }
-
-  header h1 {
-    font-size: 21px;
-    letter-spacing: 0;
-  }
-
-  header p {
-    font-size: 12px;
-  }
-
-  header .english-name {
-    font-size: 9px;
-    letter-spacing: .7px;
-  }
-
-  main {
-    margin-top: 12px;
-    padding: 0 8px 25px;
-  }
-
-  .calendar {
-    padding: 5px;
-  }
-
-  .weekdays,
-  .days {
-    gap: 2px;
-  }
-
-  .day {
-    min-height: 65px;
-    border-radius: 5px;
-  }
-
-  .daynum {
-    font-size: 12px;
-  }
-
-  .event-chip {
-    padding: 2px;
-    font-size: 9px;
-  }
-
-  .toolbar {
-    padding: 10px;
-  }
-
-  .controls {
-    gap: 5px;
-  }
-
-  button,
-  input {
-    padding: 8px;
-    font-size: 13px;
-  }
-}
-
-@media(max-width: 360px) {
-  header {
-    gap: 9px;
-  }
-
-  .logo-frame {
-    width: 58px;
-    height: 58px;
-    flex-basis: 58px;
-  }
-
-  header h1 {
-    font-size: 18px;
-  }
-
-  header .english-name {
-    font-size: 8px;
-  }
-}
-
-
-/* ===== Warm, calm calendar redesign ===== */
-
-:root {
   --green: #356b5b;
   --light-green: #e8f0e8;
   --ink: #263d36;
@@ -546,7 +19,12 @@ footer {
   --gold: #c5a16b;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
+  margin: 0;
   background: var(--bg);
   color: var(--ink);
 
@@ -558,6 +36,11 @@ body {
 
   letter-spacing: .01em;
 }
+
+
+/* =========================================================
+   Header
+   ========================================================= */
 
 header {
   min-height: 390px;
@@ -620,25 +103,32 @@ header::after {
   inset: auto 0 0;
 
   height: 3px;
-  background: rgba(177,158,119,.5);
+
+  background:
+    rgba(177,158,119,.5);
 }
 
 .brand-row {
   display: flex;
   align-items: center;
+
   gap: 20px;
+
   max-width: 760px;
 }
 
 .logo-frame {
   width: 104px;
   height: 104px;
+
   flex: 0 0 104px;
 
   padding: 5px;
+
   border-radius: 50%;
 
-  background: rgba(255,255,250,.88);
+  background:
+    rgba(255,255,250,.88);
 
   box-shadow:
     0 5px 22px rgba(52,75,62,.10);
@@ -647,8 +137,11 @@ header::after {
 }
 
 .site-logo {
+  display: block;
+
   width: 100%;
   height: 100%;
+
   object-fit: contain;
 }
 
@@ -659,6 +152,7 @@ header::after {
 
 header h1 {
   margin: 0;
+
   color: #285849;
 
   font-family:
@@ -679,6 +173,7 @@ header p {
   margin: 8px 0 0;
 
   color: #567064;
+
   font-size: 14px;
   line-height: 1.8;
 }
@@ -710,12 +205,14 @@ header .motto {
   margin-bottom: 10px;
 
   color: #718a78;
+
   font-size: 14px;
   letter-spacing: .18em;
 }
 
 .hero-caption h2 {
   margin: 0;
+
   color: #285849;
 
   font-family:
@@ -734,9 +231,16 @@ header .motto {
 
 .hero-caption p {
   margin-top: 15px;
+
   color: #5f7769;
+
   font-size: 15px;
 }
+
+
+/* =========================================================
+   Main layout
+   ========================================================= */
 
 main {
   max-width: 1500px;
@@ -747,12 +251,24 @@ main {
   position: relative;
 }
 
+
+/* =========================================================
+   Toolbar
+   ========================================================= */
+
 .toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
   gap: 14px;
-  margin-bottom: 18px;
+
+  margin-bottom: 12px;
   padding: 15px 18px;
 
-  background: rgba(255,254,250,.96);
+  background:
+    rgba(255,254,250,.96);
 
   border:
     1px solid rgba(226,222,210,.95);
@@ -763,19 +279,33 @@ main {
     0 8px 28px rgba(48,58,54,.045);
 }
 
-button,
-input {
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: 8px;
+}
+
+button {
+  font: inherit;
+
   padding: 10px 14px;
 
-  background: #fffefa;
   color: var(--ink);
+  background: #fffefa;
 
-  border-color: #dedfd5;
+  border:
+    1px solid #dedfd5;
+
   border-radius: 11px;
+
+  cursor: pointer;
 
   transition:
     border-color .18s ease,
     background .18s ease,
+    color .18s ease,
     transform .18s ease;
 }
 
@@ -797,12 +327,125 @@ button.primary:hover {
   background: #2d5b4d;
 }
 
-#monthLabel {
-  color: #3c594c;
-  font-size: 19px;
+button:disabled {
+  opacity: .6;
+  cursor: wait;
 }
 
+#monthLabel {
+  min-width: 135px;
+
+  color: #3c594c;
+
+  font-size: 19px;
+  font-weight: 700;
+  text-align: center;
+}
+
+
+/* =========================================================
+   Activity type filters
+   ========================================================= */
+
+.filter-panel {
+  margin-bottom: 18px;
+  padding: 13px 16px;
+
+  background:
+    rgba(255,254,250,.96);
+
+  border:
+    1px solid rgba(226,222,210,.95);
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 5px 20px rgba(48,58,54,.035);
+}
+
+.filter-heading {
+  margin-bottom: 9px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.filter-label {
+  color: #40594d;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.filter-note {
+  color: var(--muted);
+
+  font-size: 11px;
+}
+
+.category-filters {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+.filter-button {
+  padding: 7px 11px;
+
+  color: #53665b;
+  background: #fffefa;
+
+  border:
+    1px solid #dfe3dc;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.filter-button:hover {
+  color: #285849;
+  background: #f3f7f2;
+  border-color: #9db5a5;
+}
+
+.filter-button.active {
+  color: #fffdf7;
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.filter-button.friend {
+  color: #285b91;
+  background: #edf5fd;
+  border-color: #bfd4e8;
+}
+
+.filter-button.friend.active {
+  color: white;
+  background: #4779a8;
+  border-color: #4779a8;
+}
+
+.filter-button.all.active {
+  color: #fffdf7;
+  background: #8a7048;
+  border-color: #8a7048;
+}
+
+
+/* =========================================================
+   Main panels
+   ========================================================= */
+
 .layout {
+  display: grid;
+
   grid-template-columns:
     minmax(0, 1.55fr)
     minmax(320px, 1fr);
@@ -811,7 +454,11 @@ button.primary:hover {
 }
 
 .panel {
-  background: rgba(255,254,250,.97);
+  min-width: 0;
+  overflow: hidden;
+
+  background:
+    rgba(255,254,250,.97);
 
   border:
     1px solid #e6e2d8;
@@ -823,49 +470,83 @@ button.primary:hover {
 }
 
 .panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
   padding: 17px 20px;
+
   background: #fbfaf6;
-  border-bottom-color: #ebe8de;
+
+  border-bottom:
+    1px solid #ebe8de;
 }
 
 .panel-head h2 {
+  margin: 0;
+
   color: #355d4d;
+
   font-size: 17px;
   letter-spacing: .04em;
 }
 
 .status {
   color: #858b83;
+
+  font-size: 12px;
 }
+
+
+/* =========================================================
+   Calendar
+   ========================================================= */
 
 .calendar {
   padding: 14px;
+}
+
+.weekdays,
+.days {
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, minmax(0, 1fr));
+
+  gap: 6px;
 }
 
 .weekdays div {
   padding: 9px 0 11px;
 
   color: #81877e;
+
   font-size: 12px;
   letter-spacing: .08em;
+  text-align: center;
 }
 
 .weekdays div:first-child {
   color: #b27d70;
 }
 
-.days {
-  gap: 6px;
-}
-
 .day {
+  min-width: 0;
   min-height: 104px;
+
   padding: 8px;
+  overflow: hidden;
 
   background: #fffefa;
 
-  border-color: #eeece4;
+  border:
+    1px solid #eeece4;
+
   border-radius: 11px;
+
+  cursor: pointer;
 
   transition:
     border-color .16s ease,
@@ -898,86 +579,83 @@ button.primary:hover {
 
 .daynum {
   margin-bottom: 7px;
+
   color: #4c574f;
+
   font-size: 13px;
+  font-weight: 700;
 }
 
 .event-chip {
+  display: block;
+
   margin: 4px 0;
   padding: 4px 5px;
 
-  background: #e9f0e9;
   color: #456452;
+  background: #e9f0e9;
 
-  border-left-color: #8ca692;
+  border-left:
+    3px solid #8ca692;
+
   border-radius: 5px;
 
   font-size: 11px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
 }
 
 .event-chip.more {
-  background: #f3f0e8;
   color: #817660;
+  background: #f3f0e8;
   border-left-color: #c8b58f;
 }
 
+.event-chip.school-holiday {
+  color: #285b91;
+  background: #e7f0fb;
+  border-left-color: #5b91c8;
+}
+
+.pill {
+  display: inline-block;
+
+  margin-left: 3px;
+  padding: 2px 6px;
+
+  color: #86591c;
+  background: #f4eadb;
+
+  border-radius: 20px;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   Event detail list
+   ========================================================= */
+
 .side-content {
-  padding: 17px;
+  padding: 14px;
+}
+
+.event-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
 }
 
 .event {
-  padding: 14px;
+  padding: 11px 13px;
 
   background: #fffefa;
 
-  border-color: #e8e5dc;
+  border:
+    1px solid #e8e5dc;
+
   border-radius: 12px;
-}
-
-.event h3 {
-  color: #3f5c4d;
-  line-height: 1.5;
-}
-
-.event p {
-  line-height: 1.65;
-}
-
-.event .date {
-  color: #64806d;
-}
-
-.empty {
-  color: #8a8e86;
-}
-
-.footnote {
-  padding: 12px 13px;
-
-  background: #f7f5ef;
-
-  border-radius: 10px;
-  line-height: 1.8;
-}
-
-footer {
-  max-width: none;
-
-  padding: 22px 16px 30px;
-
-  background: #e9e8df;
-  color: #7b8078;
-
-  line-height: 1.8;
-}
-
-
-/* ===== Special styling: school holidays ===== */
-
-.event-chip.school-holiday {
-  background: #e7f0fb;
-  color: #285b91;
-  border-left-color: #5b91c8;
 }
 
 .event.school-holiday {
@@ -985,16 +663,44 @@ footer {
   border-color: #c9dcef;
 }
 
-.event.school-holiday h3 {
-  color: #285b91;
+.event .date {
+  margin: 0 0 2px;
+
+  color: #64806d;
+
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 .event.school-holiday .date {
   color: #4d7eae;
 }
 
+.event h3 {
+  margin: 2px 0 4px;
 
-/* ===== Time shown only in activity details ===== */
+  color: #3f5c4d;
+
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.event.school-holiday h3 {
+  color: #285b91;
+}
+
+.event p {
+  margin: 2px 0;
+
+  color: #586270;
+
+  font-size: 13px;
+  line-height: 1.4;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 
 .event .event-time {
   display: block;
@@ -1002,8 +708,8 @@ footer {
   margin: 4px 0 3px;
   padding: 5px 8px;
 
-  background: #edf4ef;
   color: #355f50;
+  background: #edf4ef;
 
   border-radius: 6px;
 
@@ -1026,7 +732,66 @@ footer {
 }
 
 
-/* ===== Responsive final overrides ===== */
+/* =========================================================
+   Messages and footer
+   ========================================================= */
+
+.empty {
+  padding: 25px 10px;
+
+  color: var(--muted);
+
+  text-align: center;
+}
+
+.error {
+  display: none;
+
+  margin: 12px 0;
+  padding: 12px 14px;
+
+  color: #9f2d25;
+  background: #fff1f0;
+
+  border:
+    1px solid #ffd2ce;
+
+  border-radius: 10px;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.footnote {
+  margin-top: 10px;
+  padding: 10px 11px;
+
+  color: var(--muted);
+  background: #f7f5ef;
+
+  border-radius: 10px;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+footer {
+  max-width: none;
+
+  padding: 22px 16px 30px;
+
+  color: #7b8078;
+  background: #e9e8df;
+
+  font-size: 12px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+
+/* =========================================================
+   Tablet
+   ========================================================= */
 
 @media(max-width: 850px) {
   header {
@@ -1035,7 +800,8 @@ footer {
     padding:
       25px 22px 36px;
 
-    background-position: 58% center;
+    background-position:
+      58% center;
   }
 
   .hero-caption {
@@ -1051,6 +817,11 @@ footer {
   }
 }
 
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
 @media(max-width: 520px) {
   header {
     min-height: 300px;
@@ -1058,12 +829,12 @@ footer {
     padding:
       20px 14px 32px;
 
-    background-position: 61% center;
+    background-position:
+      61% center;
   }
 
   .brand-row {
     gap: 11px;
-    align-items: center;
   }
 
   .logo-frame {
@@ -1118,8 +889,46 @@ footer {
   }
 
   .toolbar {
-    padding: 11px;
+    padding: 10px;
     border-radius: 14px;
+  }
+
+  .controls {
+    gap: 5px;
+  }
+
+  button {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  #monthLabel {
+    min-width: 105px;
+  }
+
+  .filter-panel {
+    margin-bottom: 12px;
+    padding: 10px;
+    border-radius: 14px;
+  }
+
+  .filter-heading {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .filter-note {
+    display: block;
+    margin-top: 2px;
+  }
+
+  .category-filters {
+    gap: 5px;
+  }
+
+  .filter-button {
+    padding: 6px 9px;
+    font-size: 11px;
   }
 
   .panel {
@@ -1130,21 +939,24 @@ footer {
     padding: 6px;
   }
 
-  .day {
-    min-height: 67px;
-    padding: 4px;
-  }
-
-  .event-chip {
-    font-size: 9px;
-  }
-
   .weekdays,
   .days {
     gap: 3px;
   }
 
-  /* Compact activity details on mobile */
+  .day {
+    min-height: 67px;
+    padding: 4px;
+  }
+
+  .daynum {
+    font-size: 12px;
+  }
+
+  .event-chip {
+    padding: 2px;
+    font-size: 9px;
+  }
 
   .side-content {
     padding: 9px;
@@ -1182,9 +994,6 @@ footer {
 
     font-size: 12px;
     line-height: 1.3;
-
-    white-space: normal;
-    overflow-wrap: anywhere;
   }
 
   .event-time-icon {
@@ -1196,6 +1005,26 @@ footer {
     margin-top: 9px;
     padding: 9px 10px;
     line-height: 1.5;
+  }
+}
+
+@media(max-width: 360px) {
+  header {
+    gap: 9px;
+  }
+
+  .logo-frame {
+    width: 58px;
+    height: 58px;
+    flex-basis: 58px;
+  }
+
+  header h1 {
+    font-size: 18px;
+  }
+
+  header .english-name {
+    font-size: 8px;
   }
 }
 </style>
@@ -1243,6 +1072,7 @@ footer {
 
 
 <main>
+
   <div class="toolbar">
     <div class="controls">
       <button id="prevBtn">‹ 上个月</button>
@@ -1255,18 +1085,60 @@ footer {
     </div>
 
     <div class="controls">
-      <input
-        id="searchInput"
-        type="search"
-        placeholder="搜索活动、地点、负责人…"
-        aria-label="搜索活动"
-      >
-
       <button
         id="refreshBtn"
         class="primary"
       >
         刷新数据
+      </button>
+    </div>
+  </div>
+
+
+  <div
+    id="categoryPanel"
+    class="filter-panel"
+  >
+    <div class="filter-heading">
+      <span class="filter-label">
+        活动类型
+      </span>
+
+      <span
+        id="filterStatus"
+        class="filter-note"
+      >
+        默认不显示佛青之友活动
+      </span>
+    </div>
+
+    <div
+      id="categoryFilters"
+      class="category-filters"
+      aria-label="活动类型筛选"
+    >
+      <button
+        type="button"
+        class="filter-button active"
+        data-filter-mode="default"
+      >
+        一般活动
+      </button>
+
+      <button
+        type="button"
+        class="filter-button all"
+        data-filter-mode="all"
+      >
+        全部
+      </button>
+
+      <button
+        type="button"
+        class="filter-button friend"
+        data-filter-mode="friend"
+      >
+        佛青之友
       </button>
     </div>
   </div>
@@ -1280,6 +1152,7 @@ footer {
 
 
   <div class="layout">
+
     <section class="panel">
       <div class="panel-head">
         <h2>月历</h2>
@@ -1324,6 +1197,7 @@ footer {
       </div>
 
       <div class="side-content">
+
         <div
           id="eventList"
           class="event-list"
@@ -1337,8 +1211,10 @@ footer {
           活动资料来自 Google Sheets。点击「刷新数据」读取最新资料。
           网站每 5 分钟自动检查更新。
         </div>
+
       </div>
     </section>
+
   </div>
 </main>
 
@@ -1352,7 +1228,9 @@ footer {
 "use strict";
 
 
-/* Google Sheets CSV links */
+/* =========================================================
+   Google Sheets CSV links
+   ========================================================= */
 
 const ACTIVITY_CSV_URL =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vTcmNKJ322HzGxtlRqsQNQ-1DLRq-LXcivKuWEt7DWfXnf_EpofCpUkzbL9FUvK_WSxH0RaHbsCs5mY/pub?gid=1830432104&single=true&output=csv";
@@ -1368,7 +1246,28 @@ let viewDate =
   new Date(2027, 0, 1);
 
 let selectedDate = "";
-let searchTerm = "";
+
+
+/*
+  Filter modes:
+
+  default:
+  Show all activities except 佛青之友.
+
+  all:
+  Show every activity including 佛青之友.
+
+  friend:
+  Show 佛青之友 only.
+
+  categories:
+  Show one or more selected normal categories.
+*/
+
+let filterMode = "default";
+
+let selectedCategories =
+  new Set();
 
 
 const $ = id =>
@@ -1392,17 +1291,22 @@ const norm = value =>
 
 function escapeHTML(value) {
   return String(value ?? "")
-    .replace(/[&<>"']/g, character => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    })[character]);
+    .replace(
+      /[&<>"']/g,
+      character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[character]
+    );
 }
 
 
-/* CSV parser */
+/* =========================================================
+   CSV parser
+   ========================================================= */
 
 function parseCSV(text) {
   const rows = [];
@@ -1505,7 +1409,9 @@ function parseCSV(text) {
 }
 
 
-/* Date functions */
+/* =========================================================
+   Date functions
+   ========================================================= */
 
 function validDate(
   year,
@@ -1528,8 +1434,6 @@ function validDate(
     : null;
 }
 
-
-/* Original date parser retained */
 
 function parseDate(value) {
   const s =
@@ -1751,7 +1655,9 @@ function addDays(
 }
 
 
-/* Time formatting for activity details */
+/* =========================================================
+   Time formatting
+   ========================================================= */
 
 function formatTime(value) {
   const text =
@@ -1762,8 +1668,7 @@ function formatTime(value) {
   }
 
   /*
-    Excel or Google Sheets decimal time.
-    Example: 0.354166667 = 8:30 AM
+    Excel / Google Sheets decimal time.
   */
 
   if (
@@ -1816,7 +1721,6 @@ function formatTime(value) {
   }
 
   /*
-    Supported:
     08:30
     08:30:00
     19:30:00
@@ -1932,7 +1836,9 @@ function activityTime(activity) {
 }
 
 
-/* Locate likely header row */
+/* =========================================================
+   Convert CSV rows to objects
+   ========================================================= */
 
 function rowsToObjects(rows) {
   if (!rows.length) {
@@ -2031,7 +1937,9 @@ function getValue(
 }
 
 
-/* Detect activities */
+/* =========================================================
+   Detect activities
+   ========================================================= */
 
 function detectActivities(rows) {
   const objects =
@@ -2076,8 +1984,6 @@ function detectActivities(rows) {
             ]
           );
 
-        /* New: Start time */
-
         const startTime =
           getValue(
             object,
@@ -2087,8 +1993,6 @@ function detectActivities(rows) {
               /开始时间/
             ]
           );
-
-        /* New: End time */
 
         const endTime =
           getValue(
@@ -2260,7 +2164,9 @@ function detectActivities(rows) {
 }
 
 
-/* Original recurrence expansion retained */
+/* =========================================================
+   Expand recurring activities
+   ========================================================= */
 
 function expandActivities(items) {
   const expanded = [];
@@ -2429,7 +2335,9 @@ function expandActivities(items) {
 }
 
 
-/* Date information */
+/* =========================================================
+   Date information
+   ========================================================= */
 
 function parseDateInfo(rows) {
   return rowsToObjects(rows)
@@ -2493,7 +2401,9 @@ function parseDateInfo(rows) {
 }
 
 
-/* Fetch CSV */
+/* =========================================================
+   Fetch CSV
+   ========================================================= */
 
 async function fetchCSV(url) {
   const response =
@@ -2538,7 +2448,300 @@ async function fetchCSV(url) {
 }
 
 
-/* Load data */
+/* =========================================================
+   Activity type filters
+   ========================================================= */
+
+function isFriendActivity(activity) {
+  const title =
+    clean(
+      activity.title
+    );
+
+  const category =
+    clean(
+      activity.category
+    );
+
+  return (
+    title.includes(
+      "佛青之友"
+    ) ||
+    category.includes(
+      "佛青之友"
+    )
+  );
+}
+
+
+function matchesFilter(activity) {
+  if (
+    filterMode === "all"
+  ) {
+    return true;
+  }
+
+  if (
+    filterMode === "friend"
+  ) {
+    return isFriendActivity(
+      activity
+    );
+  }
+
+  if (
+    filterMode === "categories"
+  ) {
+    return (
+      !isFriendActivity(
+        activity
+      ) &&
+      selectedCategories.has(
+        clean(
+          activity.category
+        )
+      )
+    );
+  }
+
+  /*
+    Default:
+    show everything except 佛青之友.
+  */
+
+  return !isFriendActivity(
+    activity
+  );
+}
+
+
+function availableCategories() {
+  const categories =
+    activities
+      .filter(
+        activity =>
+          !isFriendActivity(
+            activity
+          )
+      )
+      .map(
+        activity =>
+          clean(
+            activity.category
+          )
+      )
+      .filter(Boolean);
+
+  return [
+    ...new Set(
+      categories
+    )
+  ].sort(
+    (
+      first,
+      second
+    ) =>
+      first.localeCompare(
+        second,
+        "zh-CN"
+      )
+  );
+}
+
+
+function filterStatusText() {
+  if (
+    filterMode === "all"
+  ) {
+    return "显示全部活动，包括佛青之友";
+  }
+
+  if (
+    filterMode === "friend"
+  ) {
+    return "只显示佛青之友活动";
+  }
+
+  if (
+    filterMode === "categories"
+  ) {
+    const selected =
+      Array.from(
+        selectedCategories
+      );
+
+    if (
+      selected.length
+    ) {
+      return (
+        "已选择：" +
+        selected.join("、")
+      );
+    }
+  }
+
+  return "默认不显示佛青之友活动";
+}
+
+
+function renderCategoryFilters() {
+  const categories =
+    availableCategories();
+
+  const fixedButtons = `
+    <button
+      type="button"
+      class="filter-button${
+        filterMode === "default"
+          ? " active"
+          : ""
+      }"
+      data-filter-mode="default"
+    >
+      一般活动
+    </button>
+
+    <button
+      type="button"
+      class="filter-button all${
+        filterMode === "all"
+          ? " active"
+          : ""
+      }"
+      data-filter-mode="all"
+    >
+      全部
+    </button>
+
+    <button
+      type="button"
+      class="filter-button friend${
+        filterMode === "friend"
+          ? " active"
+          : ""
+      }"
+      data-filter-mode="friend"
+    >
+      佛青之友
+    </button>
+  `;
+
+  const categoryButtons =
+    categories
+      .map(
+        category => `
+          <button
+            type="button"
+            class="filter-button${
+              filterMode === "categories" &&
+              selectedCategories.has(
+                category
+              )
+                ? " active"
+                : ""
+            }"
+            data-category="${escapeHTML(category)}"
+          >
+            ${escapeHTML(category)}
+          </button>
+        `
+      )
+      .join("");
+
+  $("categoryFilters").innerHTML =
+    fixedButtons +
+    categoryButtons;
+
+  $("filterStatus").textContent =
+    filterStatusText();
+
+  $("categoryFilters")
+    .querySelectorAll(
+      "[data-filter-mode]"
+    )
+    .forEach(
+      button => {
+        button.addEventListener(
+          "click",
+          () => {
+            filterMode =
+              button.dataset.filterMode;
+
+            selectedCategories.clear();
+
+            selectedDate = "";
+
+            renderCategoryFilters();
+            render();
+          }
+        );
+      }
+    );
+
+  $("categoryFilters")
+    .querySelectorAll(
+      "[data-category]"
+    )
+    .forEach(
+      button => {
+        button.addEventListener(
+          "click",
+          () => {
+            const category =
+              button.dataset.category;
+
+            if (
+              filterMode !==
+              "categories"
+            ) {
+              selectedCategories.clear();
+            }
+
+            filterMode =
+              "categories";
+
+            if (
+              selectedCategories.has(
+                category
+              )
+            ) {
+              selectedCategories.delete(
+                category
+              );
+            }
+
+            else {
+              selectedCategories.add(
+                category
+              );
+            }
+
+            /*
+              If every category is removed,
+              return to the default view.
+            */
+
+            if (
+              selectedCategories.size === 0
+            ) {
+              filterMode =
+                "default";
+            }
+
+            selectedDate = "";
+
+            renderCategoryFilters();
+            render();
+          }
+        );
+      }
+    );
+}
+
+
+/* =========================================================
+   Load data
+   ========================================================= */
 
 async function loadData() {
   $("refreshBtn").disabled =
@@ -2601,6 +2804,7 @@ async function loadData() {
     $("loadStatus").textContent =
       `成功载入 ${parsed.length} 项活动`;
 
+    renderCategoryFilters();
     render();
   }
 
@@ -2635,32 +2839,14 @@ async function loadData() {
 }
 
 
-/* Filtering and sorting */
+/* =========================================================
+   Calendar helpers
+   ========================================================= */
 
 function infoFor(key) {
   return dateInfo.find(
     item =>
       item.date === key
-  );
-}
-
-
-function matchesSearch(activity) {
-  return (
-    !searchTerm ||
-
-    [
-      activity.title,
-      activity.category,
-      activity.location,
-      activity.owner,
-      activity.description
-    ]
-      .join(" ")
-      .toLowerCase()
-      .includes(
-        searchTerm
-      )
   );
 }
 
@@ -2728,7 +2914,7 @@ function activityOn(key) {
     .filter(
       activity =>
         activity.date === key &&
-        matchesSearch(
+        matchesFilter(
           activity
         )
     )
@@ -2738,7 +2924,9 @@ function activityOn(key) {
 }
 
 
-/* Render calendar */
+/* =========================================================
+   Render calendar
+   ========================================================= */
 
 function renderCalendar() {
   const year =
@@ -2939,7 +3127,9 @@ function renderCalendar() {
 }
 
 
-/* Event detail card */
+/* =========================================================
+   Event detail card
+   ========================================================= */
 
 function eventCard(activity) {
   const date =
@@ -3042,12 +3232,14 @@ function eventCard(activity) {
 }
 
 
-/* Render event list */
+/* =========================================================
+   Render event list
+   ========================================================= */
 
 function renderList() {
   const all =
     activities.filter(
-      matchesSearch
+      matchesFilter
     );
 
   let list;
@@ -3084,10 +3276,24 @@ function renderList() {
         }
       );
 
-    title =
-      searchTerm
-        ? "搜索结果"
-        : `${viewDate.getFullYear()} 年 ${viewDate.getMonth() + 1} 月活动`;
+    if (
+      filterMode === "friend"
+    ) {
+      title =
+        `${viewDate.getFullYear()} 年 ${viewDate.getMonth() + 1} 月佛青之友活动`;
+    }
+
+    else if (
+      filterMode === "all"
+    ) {
+      title =
+        `${viewDate.getFullYear()} 年 ${viewDate.getMonth() + 1} 月全部活动`;
+    }
+
+    else {
+      title =
+        `${viewDate.getFullYear()} 年 ${viewDate.getMonth() + 1} 月活动`;
+    }
   }
 
   list.sort(
@@ -3113,11 +3319,7 @@ function renderList() {
   if (!list.length) {
     $("eventList").innerHTML = `
       <div class="empty">
-        ${
-          searchTerm
-            ? "没有找到符合条件的活动。"
-            : "这一天 / 这个月份暂时没有活动。"
-        }
+        这个筛选条件下暂时没有活动。
       </div>
     `;
 
@@ -3141,7 +3343,7 @@ function renderList() {
       list.length > 150
         ? `
           <div class="empty">
-            仅显示前 150 项，请缩小搜索范围。
+            仅显示前 150 项，请缩小筛选范围。
           </div>
         `
         : ""
@@ -3155,7 +3357,9 @@ function render() {
 }
 
 
-/* Buttons and search */
+/* =========================================================
+   Buttons
+   ========================================================= */
 
 $("prevBtn")
   .addEventListener(
@@ -3222,21 +3426,11 @@ $("refreshBtn")
   );
 
 
-$("searchInput")
-  .addEventListener(
-    "input",
-    event => {
-      searchTerm =
-        event.target.value
-          .trim()
-          .toLowerCase();
+/* =========================================================
+   Initial load and auto refresh
+   ========================================================= */
 
-      render();
-    }
-  );
-
-
-/* Initial load and auto refresh */
+renderCategoryFilters();
 
 render();
 
