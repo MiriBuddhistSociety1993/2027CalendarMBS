@@ -4930,3 +4930,96 @@ setInterval(
 
 </body>
 </html>
+/* ===== Compact Event Detail Layout ===== */
+
+.event {
+  padding: 12px 14px;
+}
+
+.event .date {
+  margin: 0 0 2px;
+  line-height: 1.35;
+}
+
+.event h3 {
+  margin: 2px 0 5px;
+  line-height: 1.35;
+}
+
+.event p {
+  margin: 2px 0;
+  line-height: 1.4;
+}
+
+/* Time row */
+.event .event-time {
+  display: block;
+
+  margin: 4px 0 3px;
+  padding: 5px 8px;
+
+  background: #edf4ef;
+  color: #355f50;
+
+  border-radius: 6px;
+
+  font-weight: 600;
+  line-height: 1.35;
+
+  white-space: nowrap;
+}
+
+.event-time-icon {
+  display: inline;
+  margin-right: 3px;
+  font-size: 13px;
+}
+
+
+/* ===== Mobile ===== */
+
+@media(max-width: 520px) {
+
+  .side-content {
+    padding: 10px;
+  }
+
+  .event-list {
+    gap: 7px;
+  }
+
+  .event {
+    padding: 10px 11px;
+  }
+
+  .event .date {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.3;
+  }
+
+  .event h3 {
+    margin: 2px 0 4px;
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .event p {
+    margin: 1px 0;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .event .event-time {
+    margin: 3px 0;
+    padding: 4px 7px;
+
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .event-time-icon {
+    font-size: 12px;
+    margin-right: 2px;
+  }
+}
